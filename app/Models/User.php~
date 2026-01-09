@@ -47,7 +47,6 @@ class User extends Authenticatable
     }
 public function dashboardUrl()
 {
-//ret match(#th-role){role => role.ds}
     return match($this->role) {
         'admin'   => route('admin.dashboard'),
         'petugas' => route('petugas.dashboard'),

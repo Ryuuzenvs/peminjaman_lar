@@ -39,6 +39,7 @@
 <tr>
 <td colspan=4 class="text-center">kosong</td>
 </tr>
+@endif
 @endforelse
 </tbody>
 
