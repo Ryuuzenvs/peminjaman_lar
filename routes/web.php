@@ -8,6 +8,24 @@ Route::post('/login', [auth::class, 'login']) -> name('login.post');
 Route::post('/logout', [auth::class, 'logout']) -> name('logout');
 
 //ro midl([aut, 'role:']) ->group(func(){  })
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+//ro get (role das, func () {ret viw(role.i); })->name rol das
+    Route::get('/admin/dashboard', function() {
+return view('admin.index');
+    })-> name('admin.dashboard');
 });
+
+//ro midl([aut, 'role:']) ->group(func(){  })
+Route::middleware(['auth', 'role:petugas'])->group(function () {
+//ro get (role das, func () {ret viw(role.i); })->name rol das
+    Route::get('/petugas/dashboard', function() {return view('petugas.index');}) -> name('petugas.dashboard');
+});
+
+//ro midl([aut, 'role:']) ->group(func(){  })
+Route::middleware(['auth', 'role:peminjam'])->group(function () {
+//ro get (role das, func () {ret viw(role.i); })->name rol das
+    Route::get('/peminjam/dashboard', function() {return view('peminjam.index');}) -> name('peminjam.dashboard');
+});
+
+  
+
