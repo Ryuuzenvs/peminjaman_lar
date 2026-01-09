@@ -7,7 +7,9 @@ use App\Http\Controllers\CategoryController;  // Tambahkan ini
 
 //route get [authc class] -> name
 Route::get('/', [authController::class, 'showlogin']) -> name('login');
+Route::get('/signup', [authController::class, 'signup']) -> name('signup');
 Route::post('/login', [authController::class, 'login']) -> name('login.post');
+Route::post('/signupacc', [authController::class, 'signupacc']) -> name('signupacc.post');
 Route::post('/logout', [authController::class, 'logout']) -> name('logout');
 
 //ro midl([aut, 'role:']) ->group(func(){  })

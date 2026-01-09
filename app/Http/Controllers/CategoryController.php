@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-    return view(admin.categories.create);
+    return view('admin.categories.create');
     }
 
     /**
@@ -47,6 +47,7 @@ return back()->with('success', 'created');
     public function show(string $id)
     {
         //
+        
     }
 
     /**
@@ -55,6 +56,8 @@ return back()->with('success', 'created');
     public function edit(string $id)
     {
         //
+$categories = \App\Models\category::findOrFail($id);
+        return view('admin.categories.edit', compact('categories'));
     }
 
     /**
@@ -72,7 +75,7 @@ return back()->with('success', 'created');
     {
         //
  //
-    \App\Models\category::findOrFail(id)->delete();
+    \App\Models\category::findOrFail($id)->delete();
 return back()->with('success', 'deleted');
     }
 }

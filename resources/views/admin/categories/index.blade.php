@@ -1,32 +1,47 @@
 @extends('app')
 
 @section('content')
-<table class="table table-striped">
+<div class="card">
+
+<div class="card-header d-flex justify-content-between">
+
+<h5>Daftar Kategori</h5>
+<a class="btn btn-warning btn-sm" href="{{route('admin.dashboard')}}">back </a>
+</div>
+
+<div class="card-body">
+<table class="table table-striped text-center">
 <thead>
 
 <tr>
-                    <th>Nama Alat</th>
-                    <th>Kategori</th>
-                    <th>Stok</th>
-                    <th>Aksi</th>
+<th>Kategori</th>
+<th>Aksi</th>
 </tr>
 
 </thead>
 
 <tbody>
-@foreach($tools as $t)
+@forelse($categories as $c)
 <tr>
-<td> {{ $t->name}}</td>
-<td> {{ $t->category->nama_kategory}}</td>
-<td> {{ $t->stock}}</td>
+<td> {{ $c->nama_kategori}}</td>
 <td>
-<form method="post" action="{{route(tools.destroy, $t->id)}}">
+<form method="post" action="{{route('category.destroy', $c->id)}}">
+@csrf
 @method('DELETE')
 <button class="btn btn-danger btn-sm">Hapus</button>
 </form>
+<a href="{{route('category.edit', $c->id)}}" class="btn btn-warning">edit</a>
 </td>
-<tr>
-@endforeach
-</tbody>
+</tr>
 
+@empty
+<tr>
+<td colspan=3 class="text-center">kosong</td>
+</td>
+@endforelse
+</tbody>
+<a class="btn btn-primary btn-sm" href="{{route('category.create')}}">Tambah Kategori</a>
 </table>
+</div>
+</div>
+@endsection

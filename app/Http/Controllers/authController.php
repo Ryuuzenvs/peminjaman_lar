@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 //use ilmuna/ http/ req, ilumna/supp/fasc/auth
 use Illuminate\Support\Facades\Auth; // 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
@@ -43,5 +45,30 @@ public function logout(){
 //session()->destroy
 Auth::logout();
 return redirect()->route('login');
+
+}
+
+
+public function signup(){
+    return view('auth.signup');
+}
+
+public function signupacc(Request $request)
+    {
+        //
+        $lolos = $request->validate([
+'name' => 'required',
+'email' => 'required|email',
+'password' => 'required'
+]);
+
+$data = [
+'name' => $request->name,
+'email' => $request->email,
+'password'=>hash::make($request->password),
+];
+
+   \App\Models\User::create($data);
+    return redirect()->route('login')->with('success', 'berhasil dibuat');
     }
 }

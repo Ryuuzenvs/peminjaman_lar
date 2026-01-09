@@ -6,11 +6,11 @@
 <div class="card-header d-flex justify-content-between">
 
 <h5>Daftar Alat</h5>
-<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">Tambah Alat</button>
+<a class="btn btn-warning btn-sm" href="{{route('admin.dashboard')}}">back </a>
 </div>
 
 <div class="card-body">
-<table class="table table-striped">
+<table class="table table-striped text-center">
 <thead>
 
 <tr>
@@ -41,7 +41,7 @@
 </tr>
 @endforelse
 </tbody>
-
+<a class="btn btn-primary btn-sm">Tambah Alat</a>
 </table>
 
 </div>
