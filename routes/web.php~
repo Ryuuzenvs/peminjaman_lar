@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Route;
 //route get [authc class] -> name
 Route::get('/', [auth::class, 'showlogin']) -> name('login');
 Route::post('/login', [auth::class, 'login']) -> name('login.post');
-Route::post('/logout', [auth::class, 'logout']) -> name('logout');
+Route::post('/logout', [auth::class, 'logout']) -> name('logout.post');
 
-//ro midl([aut, 'role:']) ->group(func(){  })
 Route::get('/', function () {
     return view('welcome');
 });
