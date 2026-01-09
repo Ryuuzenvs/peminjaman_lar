@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth; // 
 use Illuminate\Http\Request;
 
-class auth extends Controller
+class authController extends Controller
 {
     //
 public function showlogin()
     {
         //
-    return view(auth.login)
+    return view(auth.login);
     }
 
 //req param

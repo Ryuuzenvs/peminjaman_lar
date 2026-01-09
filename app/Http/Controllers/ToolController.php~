@@ -74,6 +74,6 @@ return back()->with('success', 'created');
     {
         //
     \App\Models\Tool::find(id)->delete();
-return back()->with('success', 'deleted');
+return back()->with('success', 'created');
     }
 }

@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ToolController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // var tool get by mod tool, with(cate)-las-get
-    $tools = App\Models\Tool::with('category')->latest()->get();
-//    ret viw tool ind, compact route
-    return view(admin.tools.index, compact('tools'))
+        //
     }
 
     /**
@@ -23,8 +20,6 @@ class ToolController extends Controller
     public function create()
     {
         //
-    return view(admin.tools.create)
-    
     }
 
     /**
@@ -32,15 +27,7 @@ class ToolController extends Controller
      */
     public function store(Request $request)
     {
-        //var req-valid array '[row tool]
-$data = $request->validate([
-    'nama' => 'required',
-    'stock'=> 'required|numeric',
-    'category' => 'required',
-    ]);
-//get app mod tool, create var
-\App\Models\Tool::create($data);
-return back()->with('success', 'created');
+        //
     }
 
     /**
@@ -73,7 +60,5 @@ return back()->with('success', 'created');
     public function destroy(string $id)
     {
         //
-    \App\Models\Tool::find(id)->delete();
-return back()->with('success', 'deleted');
     }
 }

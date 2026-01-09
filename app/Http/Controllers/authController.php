@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth; // 
 use Illuminate\Http\Request;
 
-class auth extends Controller
+class authController extends Controller
 {
     //
 public function showlogin()
     {
         //
-    return view(auth.login);
+    return view('auth.login');
     }
 
 //req param
@@ -27,10 +27,10 @@ public function login()
 ]);
 
 if(Auth::attempt($lolos)){
-        $requrest->session()->regenerate();
+        $request->session()->regenerate();
         
 //       $ auth table name, role
-        $role = Auth::user->role;
+        $role = Auth::user()->role;
 //      ret red rout
         if($role == 'admin') return redirect()->route('admin.dashboard');
         if($role == 'petugas') return redirect()->route('petugas.dashboard');
