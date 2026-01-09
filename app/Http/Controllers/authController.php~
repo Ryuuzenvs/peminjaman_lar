@@ -11,14 +11,14 @@ class authController extends Controller
 public function showlogin()
     {
         //
-    return view('auth.login'');
+    return view('auth.login');
     }
 
 //req param
 //$ validt, if lolos auth attmp, regret sesio, =>
 // $ role, role return
 // else back
-public function login()
+public function login(Request $request)
     {
         //
         $lolos = $request->validate([

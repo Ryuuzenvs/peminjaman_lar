@@ -18,11 +18,11 @@ public function showlogin()
 //$ validt, if lolos auth attmp, regret sesio, =>
 // $ role, role return
 // else back
-public function login()
+public function login(Request $request)
     {
         //
         $lolos = $request->validate([
-'username' => 'required',
+'name' => 'required',
 'password' => 'required'
 ]);
 
