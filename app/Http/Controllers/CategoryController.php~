@@ -3,21 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\tool;
 
-class ToolController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // var tool get by mod tool, with(cate)-las-get
-    $tools = \App\Models\tool::with('category')->latest()->get();
-//    $ cat get by model cat::all
-$categories = \App\Models\category::all();
-//    ret viw tool ind, compact route
-    return view(admin.tools.index, compact('tools', 'categories'));
+        //$ categ = get by mod::all()
+        //ret viw(ad.cat.ind, ret value categories)
+        $categories = App\Models\Category::all();
+        return view(admin.categories.index, compact('categories'))
     }
 
     /**
@@ -26,8 +23,7 @@ $categories = \App\Models\category::all();
     public function create()
     {
         //
-    return view(admin.tools.create);
-    
+    return view(admin.categories.create)
     }
 
     /**
@@ -35,14 +31,13 @@ $categories = \App\Models\category::all();
      */
     public function store(Request $request)
     {
-        //var req-valid array '[row tool]
+        //
+//var req-valid array '[row tool]
 $data = $request->validate([
-    'nama' => 'required',
-    'stock'=> 'required|numeric',
-    'category' => 'required',
+    'nama_kategori' => 'required',
     ]);
 //get app mod tool, create var
-\App\Models\Tool::create($data);
+\App\Models\category::create($data);
 return back()->with('success', 'created');
     }
 
@@ -76,7 +71,8 @@ return back()->with('success', 'created');
     public function destroy(string $id)
     {
         //
-    \App\Models\Tool::find(id)->delete();
+ //
+    \App\Models\category::find(id)->delete();
 return back()->with('success', 'deleted');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\tool;
 
 class ToolController extends Controller
 {
@@ -12,9 +13,11 @@ class ToolController extends Controller
     public function index()
     {
         // var tool get by mod tool, with(cate)-las-get
-    $tools = App\Models\Tool::with('category')->latest()->get();
+    $tools = \App\Models\tool::with('category')->latest()->get();
+//    $ cat get by model cat::all
+$categories = \App\Models\category::all();
 //    ret viw tool ind, compact route
-    return view(admin.tools.index, compact('tools'))
+    return view('admin.tools.index', compact('tools', 'categories'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ToolController extends Controller
     public function create()
     {
         //
-    return view(admin.tools.create)
+    return view(admin.tools.create);
     
     }
 

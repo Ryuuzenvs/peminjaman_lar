@@ -21,7 +21,7 @@ abrt 403
     public function handle(Request $request, Closure $next, $role): Response
     {
         if (!auth()->check() || auth()->user()->role !== $role){
-        abort(403, '');
+        abort(403, 'eror bad req');
     }
         return $next($request);
     }

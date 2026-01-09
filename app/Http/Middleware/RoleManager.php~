@@ -20,8 +20,8 @@ abrt 403
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if (!auth()::check() || auth()::user()->role !== $role){
-        abort(403, '');
+        if (!auth()->check() || auth()->user()->role !== $role){
+        abort(403, 'eror');
     }
         return $next($request);
     }

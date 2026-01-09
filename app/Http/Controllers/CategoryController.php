@@ -11,7 +11,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        //$ categ = get by mod::all()
+        //ret viw(ad.cat.ind, ret value categories)
+        $categories = App\Models\Category::all();
+        return view(admin.categories.index, compact('categories'))
     }
 
     /**
@@ -20,6 +23,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+    return view(admin.categories.create)
     }
 
     /**
@@ -28,6 +32,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+//var req-valid array '[row tool]
+$data = $request->validate([
+    'nama_kategori' => 'required',
+    ]);
+//get app mod tool, create var
+\App\Models\category::create($data);
+return back()->with('success', 'created');
     }
 
     /**
@@ -60,5 +71,8 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+ //
+    \App\Models\category::findOrFail(id)->delete();
+return back()->with('success', 'deleted');
     }
 }
