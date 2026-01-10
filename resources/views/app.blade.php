@@ -1,5 +1,9 @@
 <link href={{ asset('bootstrap.min.css') }} rel="stylesheet">
-
+<style>
+* {
+    outline: 1px solid red !important;
+  }
+</style>
 
 <body class="bg-light">
 

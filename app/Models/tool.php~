@@ -13,6 +13,12 @@ protected $fillable = [
         'stock',
 'condition'
     ];
+
+// Di dalam class Tool
+public function category() {
+    return $this->belongsTo(category::class);
+}
+
 }
 
 

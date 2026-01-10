@@ -25,13 +25,16 @@
 <tbody>
 @forelse($tools as $t)
 <tr>
-<td> {{ $t->name}}</td>
-<td> {{ $t->category->nama_kategory}}</td>
+<td> {{ $t->name_tools}}</td>
+<td> {{ $t->category->nama_kategori}}</td>
 <td> {{ $t->stock}}</td>
 <td>
-<form method="post" action="{{route(tools.destroy, $t->id)}}">
+<form method="post" action="{{route('tools.destroy', $t->id)}}">
 @method('DELETE')
+@csrf
+
 <button class="btn btn-danger btn-sm">Hapus</button>
+<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning"><a/>
 </form>
 </td>
 </tr>
@@ -41,7 +44,7 @@
 </tr>
 @endforelse
 </tbody>
-
+<a class="btn btn-primary btn-sm" href="{{route('tools.create')}}">Tambah Alat</a>
 </table>
 
 </div>

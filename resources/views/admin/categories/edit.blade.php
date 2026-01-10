@@ -7,8 +7,9 @@
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <form action="{{ route('category.edit', $categories->id) }}" method="POST">
+            <form action="{{ route('category.update', $categories->id) }}" method="POST">
                 @csrf
+@method('PUT')
                 <div class="mb-3">
                     <label class="form-label"> nama kategori</label>
                     <input type="text" name="nama_kategori" class="form-control" value="{{$categories->nama_kategori}}" required>

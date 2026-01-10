@@ -66,6 +66,13 @@ $categories = \App\Models\category::findOrFail($id);
     public function update(Request $request, string $id)
     {
         //
+$request->validate(['nama_kategori' => 'required']);
+$category = \App\Models\category::findOrFail($id);
+$updatedata = $request->all();
+ //cat->upd($upd)
+$category->update($updatedata);
+
+return back()->with('success', 'updated');
     }
 
     /**
