@@ -16,12 +16,17 @@ class loan extends Model
 'return_date',
 'status',
     ];
-}
 
-public function user {
+public function user() {
 return $this->belongsTo(user::class);
 }
 
-public function tool {
+public function tool() {
 return $this->belongsTo(tool::class);
 }
+
+}
+
+
+
+

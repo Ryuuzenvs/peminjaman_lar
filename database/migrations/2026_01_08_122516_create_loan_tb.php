@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loan_tb', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('tool_id')->constrained();
             $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->date('date_loan');
             $table->integer('penalty')->default(0);
-            $table->date('return_date');
+            $table->date('return_date')->nullable();
             $table->enum('status', ['pend', 'borro', 'return'])->default('pend');
             $table->timestamps();
         });

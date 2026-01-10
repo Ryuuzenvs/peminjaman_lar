@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ToolController;      // Tambahkan ini
 use App\Http\Controllers\CategoryController;  // Tambahkan ini
+use App\Http\Controllers\LoanController;  // Tambahkan ini
 
 //route get [authc class] -> name
 Route::get('/', [authController::class, 'showlogin']) -> name('login');
@@ -33,7 +34,8 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 //ro midl([aut, 'role:']) ->group(func(){  })
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
 //ro get (role das, func () {ret viw(role.i); })->name rol das
-    Route::get('/peminjam/dashboard', function() {return view('peminjam.index');}) -> name('peminjam.dashboard');
+    Route::get('/peminjam/dashboard', [LoanController::class, 'peminjamIndex'])->name('peminjam.dashboard');
+Route::post('/pinjam', [LoanController::class, 'store'])->name('pinjam.store');
 });
 
   
