@@ -112,5 +112,17 @@ public function returnTool($id) {
         return back()->with('error', $e->getMessage());
         }
     }
+
+public function report(Request $request) {
+    $query = loan::with(['user', 'tool']);
+
+    // Tambahkan filter simpel jika ada request
+    if ($request->status) {
+        $query->where('status', $request->status);
+    }
+
+    $reports = $query->latest()->get();
+    return view('petugas.report', compact('reports'));
+}
 }
 

@@ -42,4 +42,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="{{route('petugas.report')}}" class="btn btn-primary">cetak laporan</a>
 @endsection

@@ -110,7 +110,7 @@ public function returnTool($id) {
     } catch (\Exception $e) { // Perbaiki typo 'Excaption'
         DB::rollback(); // Perbaiki typo 'roolback'
         return back()->with('error', $e->getMessage());
+        }
     }
-    
 }
 

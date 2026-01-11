@@ -1,0 +1,51 @@
+@extends('app')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-3 no-print">
+    <h3>Laporan Peminjaman</h3>
+    <button onclick="window.print()" class="btn btn-primary">Cetak Laporan (PDF)</button>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Peminjam</th>
+                    <th>Alat</th>
+                    <th>Tgl Pinjam</th>
+                    <th>Tgl Kembali</th>
+                    <th>Status</th>
+                    <th>Denda</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($reports as $r)
+                <tr>
+                    <td>{{ $r->user->name }}</td>
+                    <td>{{ $r->tool->name_tools }}</td>
+                    <td>{{ $r->date_loan }}</td>
+                    <td>{{ $r->return_date ?? '-' }}</td>
+                    <td>{{ strtoupper($r->status) }}</td>
+                    <td>Rp {{ number_format($r->penalty, 0, ',', '.') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+<a href="{{route('petugas.dashboard')}}" class="btn btn-danger">back</a>
+</div>
+
+<style>
+/* CSS agar saat di-print tombol dan navigasi hilang */
+@media print {
+    .no-print, .navbar, .btn, .footer {
+        display: none !important;
+    }
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+</style>
+@endsection

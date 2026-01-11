@@ -20,7 +20,7 @@
         <div class="card bg-warning text-white shadow">
             <div class="card-body">
                 <h5>Peminjaman Aktif</h5>
-                <h3>{{ \App\Models\loan::where('status', 'borrowed')->count() }}</h3>
+                <h3>{{ \App\Models\loan::where('status', 'borro')->count() }}</h3>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="card bg-danger text-white shadow">
             <div class="card-body">
                 <h5>Perlu Approval</h5>
-                <h3>{{ \App\Models\loan::where('status', 'pending')->count() }}</h3>
+                <h3>{{ \App\Models\loan::where('status', 'pend')->count() }}</h3>
             </div>
         </div>
     </div>
