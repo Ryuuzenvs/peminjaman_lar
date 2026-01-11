@@ -28,13 +28,17 @@ return view('admin.index');
 //ro midl([aut, 'role:']) ->group(func(){  })
 Route::middleware(['auth', 'role:petugas'])->group(function () {
 //ro get (role das, func () {ret viw(role.i); })->name rol das
-    Route::get('/petugas/dashboard', function() {return view('petugas.index');}) -> name('petugas.dashboard');
+    Route::get('/petugas/dashboard', [LoanController::class, 'petugasIndex']) -> name('petugas.dashboard');
+Route::put('/loans/return/{id}', [LoanController::class, 'returnTool'])->name('loans.return');
+Route::put('/loans/approve/{id}', [LoanController::class, 'approve'])->name('loans.approve');
 });
 
 //ro midl([aut, 'role:']) ->group(func(){  })
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
 //ro get (role das, func () {ret viw(role.i); })->name rol das
     Route::get('/peminjam/dashboard', [LoanController::class, 'peminjamIndex'])->name('peminjam.dashboard');
+Route::post('/pinjam', [LoanController::class, 'store'])->name('pinjam.store');
+
 });
 
   

@@ -8,10 +8,21 @@ use App\Models\loan;
 //use ilum.supp.fas.db n auth
 use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Auth;
+//use carb/carb
+use Carbon\Carbon;
 
 class LoanController extends Controller
 {
     //
+    public function petugasIndex(){
+//    $ tools = tool:wher(stok,>,0)>get()
+    $tools = tool::where('stock', '>' ,0)->get();
+//    $ loan  = loan:wher(us_id, auth::id())>with('tool')>last()>get()
+$loans = \App\Models\loan::with(['user', 'tool'])->latest()->get();
+// ret view (pem.ind, comp var)
+    return view('petugas.index', compact('tools', 'loans'));
+    }
+
     public function peminjamIndex(){
 //    $ tools = tool:wher(stok,>,0)>get()
     $tools = tool::where('stock', '>' ,0)->get();
@@ -53,6 +64,52 @@ return back()->with('success', 'Berhasil meminjam alat!');
 //db rb
 DB::roolback();
 return back()->with('error',$e->getMessage());
+        }
+    }
+
+public function approve($id){
+//    loan = loan:finfil(id)
+$loan = loan::findOrFail($id);
+//loan > upd =([ status boro, admin id => auth() id()])
+$loan->update([
+'status' => 'borro',
+'admin_id' => auth()->id(),
+]);
+return back()->with('success', 'Alat telah diserahkan ke peminjam.');
+    }
+
+public function returnTool($id) {
+    DB::beginTransaction();
+    try {
+        $loan = loan::findOrFail($id);
+        
+        // --- TYPO DISINI TADI ---
+        // Kamu tadi nulis $tool = tool::findOrFail($id), padahal $id itu ID LOAN, bukan ID TOOL.
+        $tool = tool::findOrFail($loan->tool_id); 
+
+        $loandate = Carbon::parse($loan->date_loan);
+        $returndate = now();
+        $selisih = $loandate->diffInDays($returndate);
+
+        $denda = 0;
+        if($selisih > 3) {
+            $denda = ($selisih - 3) * 5000;
+        }
+
+        $loan->update([
+            'return_date' => $returndate,
+            'status' => 'return',
+            'penalty' => $denda, // Pastikan nama kolom di DB 'penalty' atau 'denda'
+        ]);
+
+        $tool->increment('stock');
+
+        DB::commit();
+        return back()->with('success', 'Berhasil return alat!');
+        
+    } catch (\Exception $e) { // Perbaiki typo 'Excaption'
+        DB::rollback(); // Perbaiki typo 'roolback'
+        return back()->with('error', $e->getMessage());
         }
     }
 }
