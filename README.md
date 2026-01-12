@@ -1,3 +1,54 @@
+Panduan Menjalankan Proyek (Running Guide)
+
+Pastikan di komputer sudah terinstall PHP >= 8.2, Composer, dan MySQL/MariaDB.
+1. Clone Proyek
+
+Buka terminal, lalu jalankan perintah:
+Bash
+
+git clone https://github.com/Ryuuzenvs/peminjaman_lar.git
+cd peminjaman_lar
+
+2. Install Dependencies
+
+Instal semua library Laravel yang dibutuhkan melalui Composer:
+Bash
+
+composer install
+
+3. Konfigurasi Environment (.env)
+
+Laravel membutuhkan file .env untuk pengaturan database. Salin dari file contoh:
+Bash
+
+cp .env.example .env
+
+Setelah itu, buka file .env dan sesuaikan bagian ini:
+Plaintext
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_peminjaman_lar  <-- Sesuaikan dengan nama DB yang kamu buat
+DB_USERNAME=root               <-- Sesuaikan dengan username DB kamu
+DB_PASSWORD=                   <-- Sesuaikan dengan password DB kamu
+
+4. Generate App Key
+
+Ini wajib agar aplikasi bisa berjalan dan enkripsi session aktif:
+Bash
+
+php artisan key:generate
+
+5. Setup Database & Migrasi
+
+Buat database baru di phpMyAdmin/Terminal dengan nama db_peminjaman_lar. Lalu, jalankan migrasi tabel beserta data awal (jika ada seeder):
+Bash
+
+php artisan migrate
+
+Aplikasi Peminjaman Alat Inventaris adalah sistem berbasis web yang dirancang untuk mengelola sirkulasi peminjaman alat secara digital. Sistem ini membagi akses menjadi tiga level: Admin (Kelola master data), Petugas (Operasional/Approval), dan Peminjam (Self-service booking). Fitur unggulannya adalah perhitungan denda otomatis dan manajemen stok yang terintegrasi dengan transaksi.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
