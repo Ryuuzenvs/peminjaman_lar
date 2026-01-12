@@ -16,7 +16,7 @@
         @foreach($loans as $l)
         <tr>
             <td>{{ $l->user->name }}</td>
-            <td>{{ $l->tool->name_tools }}</td>
+<td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
             <td>{{ $l->date_loan }}</td>
             <td>
                 <span class="badge {{ $l->status == 'pend' ? 'bg-warning' : ($l->status == 'borro' ? 'bg-info' : 'bg-success') }}">

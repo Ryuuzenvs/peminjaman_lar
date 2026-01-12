@@ -81,7 +81,7 @@ $tools = \App\Models\tool::findOrFail($id);
     $find = \App\Models\tool::findOrFail($id);
 $updatedata = $request->all();
     $find->update($updatedata);
-return back()->with('success', 'deleted');
+return back()->with('success', 'updated');
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tool;
 use App\Models\category;
+use Illuminate\Database\Eloquent\SoftDeletes; // Tambahkan ini
 
 class ToolController extends Controller
 {
