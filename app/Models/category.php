@@ -11,7 +11,7 @@ class category extends Model
     'nama_kategori'   
     ];
 
-// Di dalam class Tool
+// in cat cls
 public function tools() {
     return $this->hasMany(tool::class);
 

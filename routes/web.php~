@@ -31,6 +31,7 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('/petugas/dashboard', [LoanController::class, 'petugasIndex']) -> name('petugas.dashboard');
 Route::put('/loans/return/{id}', [LoanController::class, 'returnTool'])->name('loans.return');
 Route::put('/loans/approve/{id}', [LoanController::class, 'approve'])->name('loans.approve');
+Route::get('/petugas/report', [LoanController::class, 'report'])->name('petugas.report');
 });
 
 //ro midl([aut, 'role:']) ->group(func(){  })

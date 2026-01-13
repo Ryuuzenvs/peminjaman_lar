@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\ToolController;      // Tambahkan ini
-use App\Http\Controllers\CategoryController;  // Tambahkan ini
-use App\Http\Controllers\LoanController;  // Tambahkan ini
+use App\Http\Controllers\ToolController;      
+use App\Http\Controllers\CategoryController;  
+use App\Http\Controllers\LoanController;  
 
 //route get [authc class] -> name
 Route::get('/', [authController::class, 'showlogin']) -> name('login');

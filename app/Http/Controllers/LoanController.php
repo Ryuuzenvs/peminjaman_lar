@@ -83,8 +83,7 @@ public function returnTool($id) {
     try {
         $loan = loan::findOrFail($id);
         
-        // --- TYPO DISINI TADI ---
-        // Kamu tadi nulis $tool = tool::findOrFail($id), padahal $id itu ID LOAN, bukan ID TOOL.
+       
         $tool = tool::findOrFail($loan->tool_id); 
 
         $loandate = Carbon::parse($loan->date_loan);
@@ -99,7 +98,7 @@ public function returnTool($id) {
         $loan->update([
             'return_date' => $returndate,
             'status' => 'return',
-            'penalty' => $denda, // Pastikan nama kolom di DB 'penalty' atau 'denda'
+            'penalty' => $denda, 
         ]);
 
         $tool->increment('stock');
@@ -107,8 +106,8 @@ public function returnTool($id) {
         DB::commit();
         return back()->with('success', 'Berhasil return alat!');
         
-    } catch (\Exception $e) { // Perbaiki typo 'Excaption'
-        DB::rollback(); // Perbaiki typo 'roolback'
+    } catch (\Exception $e) { 
+        DB::rollback(); 
         return back()->with('error', $e->getMessage());
         }
     }
@@ -116,7 +115,7 @@ public function returnTool($id) {
 public function report(Request $request) {
     $query = loan::with(['user', 'tool']);
 
-    // Tambahkan filter simpel jika ada request
+    //  filter simpel jika ada req
     if ($request->status) {
         $query->where('status', $request->status);
     }

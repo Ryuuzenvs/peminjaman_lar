@@ -38,7 +38,7 @@
 </div>
 
 <style>
-/* CSS agar saat di-print tombol dan navigasi hilang */
+
 @media print {
     .no-print, .navbar, .btn, .footer {
         display: none !important;

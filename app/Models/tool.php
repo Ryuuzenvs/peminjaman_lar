@@ -16,7 +16,7 @@ protected $fillable = [
 'condition'
     ];
 
-// Di dalam class Tool
+// in tool cls
 public function category() {
     return $this->belongsTo(category::class);
 }
