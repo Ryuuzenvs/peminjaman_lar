@@ -9,6 +9,8 @@ Bash
 git clone https://github.com/Ryuuzenvs/peminjaman_lar.git
 cd peminjaman_lar
 
+1.1 opsional : instal zip, esktrak.
+
 2. Install Dependencies
 
 Instal semua library Laravel yang dibutuhkan melalui Composer:
