@@ -13,7 +13,7 @@
 <a class="navbar-brand" href="{{auth()->user()->dashboardUrl()}}
 ">PinjamAlat</a>
 <div class="navbar-nav">
-
+    {{-- Jika role bukan admin, tambahkan class disabled --}}
     <a class="nav-link {{ auth()->user()->role != 'admin' ? 'disabled text-muted' : '' }}" 
        href="{{ route('category.index') }}">Category</a>
 

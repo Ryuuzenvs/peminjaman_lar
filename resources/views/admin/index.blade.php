@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12 mb-4">
-        <h2>Selamat Datang, {{ auth()->user()->name }}!</h2>
+        <h2>Selamat Datang, {{ auth()->user()->email }}!</h2>
         <p class="text-muted">Role: <span class="badge bg-primary">{{ ucfirst(auth()->user()->role) }}</span></p>
     </div>
 
