@@ -45,7 +45,8 @@
                 <ul class="list-group">
                     @forelse($myloan as $loan)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        {{ $loan->tool->name_tools }}
+                        {{ $loan->tool->name_tools }} |
+                        {{ $loan->date_loan}}
                         <span class="badge bg-warning text-dark">{{ $loan->status }}</span>
                     </li>
                     @empty

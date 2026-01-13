@@ -44,6 +44,7 @@
             <div class="card-body">
                 <a href="{{ route('tools.index') }}" class="btn btn-outline-primary">Kelola Data Alat</a>
                 <a href="{{route('category.index')}}" class="btn btn-outline-secondary">Kelola Kategori</a>
+                <a href="{{route('users.index')}}" class="btn btn-outline-warning">Kelola user</a>
                 </div>
         </div>
     </div>

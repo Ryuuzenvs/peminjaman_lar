@@ -21,7 +21,7 @@
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('login.post') }}" method="POST">
+            <form action="{{ route('login.post') }}" method="POST" id="loginForm">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label"> usn</label>
@@ -31,12 +31,26 @@
                     <label class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="123" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100" id="loginBtn">Login</button>
             </form>
             <div class="text-center mt-3">
                 <small>Belum punya akun? <a href="{{route('signup')}}">Daftar</a></small>
             </div>
         </div>
     </div>
+<script>
+    document.getElementById('loginForm').onsubmit = function() {
+        // get id
+        const btn = document.getElementById('loginBtn');
+        const text = document.getElementById('btnText');
+        
+        // Disable btn
+        btn.disabled = true;
+        
+        // intex
+        text.innerText = 'Memproses...';
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+    };
+</script>
 </body>
 </html>

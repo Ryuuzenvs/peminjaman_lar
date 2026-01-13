@@ -21,6 +21,12 @@ public function category() {
     return $this->belongsTo(category::class);
 }
 
+    //  hasMany to loan
+public function loans() 
+{
+    return $this->hasMany(loan::class);
+}
+
 }
 
 

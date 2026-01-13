@@ -38,7 +38,7 @@ if(Auth::attempt($lolos)){
         if($role == 'petugas') return redirect()->route('petugas.dashboard');
         return redirect()->route('peminjam.dashboard');
         }
-     return back()->with('wr');
+     return back()->with('error', 'wrong password or usn, try login');
     }
 
 public function logout(){

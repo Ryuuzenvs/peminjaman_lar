@@ -8,6 +8,7 @@
             <th>Peminjam</th>
             <th>Alat</th>
             <th>Tgl Pinjam</th>
+            <th>deadline</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -17,7 +18,14 @@
         <tr>
             <td>{{ $l->user->name }}</td>
 <td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
-            <td>{{ $l->date_loan }}</td>
+            <td>
+    {{ \Carbon\Carbon::parse($l->date_loan)->format('d M Y') }}
+            </td>
+<td>
+    <span class="badge {{ now() > \Carbon\Carbon::parse($l->date_loan)->addDays(3) ? 'bg-danger' : 'bg-info' }}">
+        {{ \Carbon\Carbon::parse($l->date_loan)->addDays(3)->format('d M Y') }}
+    </span>
+</td>
             <td>
                 <span class="badge {{ $l->status == 'pend' ? 'bg-warning' : ($l->status == 'borro' ? 'bg-info' : 'bg-success') }}">
                     {{ $l->status }}

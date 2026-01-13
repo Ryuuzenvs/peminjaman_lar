@@ -79,10 +79,20 @@ return back()->with('success', 'updated');
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
- //
-    \App\Models\category::findOrFail($id)->delete();
-return back()->with('success', 'deleted');
+{
+    $category = \App\Models\category::findOrFail($id);
+
+    // Cek tool where in loan
+    // model tool row cat_id -> loans
+    $hasActiveLoans = \App\Models\tool::where('category_id', $id)
+                        ->whereHas('loans')
+                        ->exists();
+
+    if ($hasActiveLoans) {
+        return back()->with('error', 'Kategori tidak bisa dihapus : alat mengambil category id .');
     }
+
+    $category->delete();
+    return back()->with('success', 'Kategori berhasil dihapus');
+}
 }

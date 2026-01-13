@@ -5,6 +5,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\ToolController;      
 use App\Http\Controllers\CategoryController;  
 use App\Http\Controllers\LoanController;  
+use App\Http\Controllers\UserController;
 
 //route get [authc class] -> name
 Route::get('/', [authController::class, 'showlogin']) -> name('login');
@@ -16,7 +17,8 @@ Route::post('/logout', [authController::class, 'logout']) -> name('logout');
 //ro midl([aut, 'role:']) ->group(func(){  })
 Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::resource('tools', ToolController::class);
-    Route::resource('category', CategoryController::class);
+Route::resource('users', UserController::class); 
+Route::resource('category', CategoryController::class);
 //ro get (role das, func () {ret viw(role.i); })->name rol das
     Route::get('/admin/dashboard', function() {
 return view('admin.index');
