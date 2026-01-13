@@ -45,6 +45,7 @@
                 <a href="{{ route('tools.index') }}" class="btn btn-outline-primary">Kelola Data Alat</a>
                 <a href="{{route('category.index')}}" class="btn btn-outline-secondary">Kelola Kategori</a>
                 <a href="{{route('users.index')}}" class="btn btn-outline-warning">Kelola user</a>
+                <a href="{{route('admin.loans.index')}}" class="btn btn-outline-primary">Kelola loans</a>
                 </div>
         </div>
     </div>

@@ -14,6 +14,12 @@ use Carbon\Carbon;
 class LoanController extends Controller
 {
     //
+    public function adminIndex() {
+    // Tambahkan 'admin' ke dalam array with()
+    $loans = loan::with(['user', 'tool', 'admin'])->latest()->get();
+    return view('admin.loans.index', compact('loans'));
+}
+
     public function petugasIndex(){
 //    $ tools = tool:wher(stok,>,0)>get()
     $tools = tool::where('stock', '>' ,0)->get();
@@ -31,6 +37,16 @@ $loans = \App\Models\loan::with(['user', 'tool'])->latest()->get();
 // ret view (pem.ind, comp var)
     return view('peminjam.index', compact('tools', 'myloan'));
     }
+
+public function create() {
+    // cek role whres user
+    $users = \App\Models\User::where('role', 'peminjam')->get();
+    
+    // get tool whers stock
+    $tools = tool::where('stock', '>', 0)->get();
+    
+    return view('admin.loans.create', compact('users', 'tools'));
+}
     
     public function store(Request $request){
 //    ceking
@@ -52,7 +68,8 @@ $tool->decrement('stock');
 
 //create loan([loan row])
 loan::create([
-'user_id'=>Auth()->id(),
+//if thres no usr_id, get aut id
+'user_id' => $request->user_id ?? Auth::id(),
 'tool_id'=> $tool->id,
 'date_loan'=>now()
 ]);
@@ -60,9 +77,9 @@ loan::create([
 //com all data
 DB::commit();
 return back()->with('success', 'Berhasil meminjam alat!');
-        } catch (\Excaption $e){
+        } catch (\Exception $e){
 //db rb
-DB::roolback();
+DB::rollback    ();
 return back()->with('error',$e->getMessage());
         }
     }
@@ -99,6 +116,7 @@ public function returnTool($id) {
             'return_date' => $returndate,
             'status' => 'return',
             'penalty' => $denda, 
+            'admin_id' => auth()->id(),
         ]);
 
         $tool->increment('stock');
@@ -122,6 +140,40 @@ public function report(Request $request) {
 
     $reports = $query->latest()->get();
     return view('petugas.report', compact('reports'));
+    }
+
+public function edit($id) {
+    $loan = loan::findOrFail($id);
+    $users = \App\Models\User::all();
+    $tools = tool::all();
+    return view('admin.loans.edit', compact('loan', 'users', 'tools'));
 }
+
+public function update(Request $request, $id)
+{
+    $loan = loan::findOrFail($id);
+
+    if ($request->has('action') && $request->action == 'return') {
+        return $this->returnTool($id); // Kita panggil saja fungsi returnTool yang sudah kamu buat
+    }
+
+    $loan->update($request->all());
+    return redirect()->route('admin.loans.index')->with('success', 'Data peminjaman diperbarui.');
+    }
+public function destroy($id)
+{
+    $loan = \App\Models\loan::findOrFail($id);
+
+
+    $loan = \App\Models\loan::findOrFail($id);
+    
+    // condition - stock, stock++
+    if ($loan->status != 'return') {
+        \App\Models\tool::where('id', $loan->tool_id)->increment('stock');
+    }
+
+    $loan->delete();
+    return back()->with('success', 'Data transaksi dihapus & stok disesuaikan.');
+    }
 }
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name_tools');
             $table->integer('stock');
-            $table->enum('condition', ['baik', 'buruk'])->nullable();
+//            $table->enum('condition', ['baik', 'buruk'])->nullable();
            $table->softDeletes();
             $table->timestamps();
         });

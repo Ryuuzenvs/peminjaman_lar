@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // cek role in contr 
     Route::put('/loans/return/{id}', [LoanController::class, 'returnTool'])->name('loans.return');
     Route::put('/loans/approve/{id}', [LoanController::class, 'approve'])->name('loans.approve');
-    Route::post('/pinjam.store', [LoanController::class, 'store'])->name('pinjam.store');
+    Route::post('/pinjam', [LoanController::class, 'store'])->name('pinjam.store');
 });
 
 //ro midl([aut, 'role:']) ->group(func(){  })

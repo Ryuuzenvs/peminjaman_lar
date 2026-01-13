@@ -21,6 +21,12 @@ public function user() {
 return $this->belongsTo(user::class);
 }
 
+public function admin() 
+{
+    // call user class, admin id row 
+    return $this->belongsTo(User::class, 'admin_id');
+}
+
 public function tool() {
 return $this->belongsTo(tool::class);
 }
