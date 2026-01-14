@@ -44,7 +44,7 @@ php artisan key:generate
 
 5. Setup Database & Migrasi
 
-Buat database baru di phpMyAdmin/Terminal dengan nama db_peminjaman_lar. Lalu, jalankan migrasi tabel beserta data awal (jika ada seeder):
+Buat database baru di phpMyAdmin/Terminal dengan nama db_peminjaman_lar. Lalu, jalankan migrasi tabel beserta data awal:
 Bash
 
 php artisan migrate
