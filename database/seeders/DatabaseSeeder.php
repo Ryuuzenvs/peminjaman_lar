@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'peminjam',
-            'email' => 'ryuu@example.com',
+            'email' => 'ryuu1@example.com',
             'password' => hash::make('12345678'),
             'role' => 'peminjam'
         ]);
         User::factory()->create([
             'name' => 'owner',
-            'email' => 'ryuu@example.com',
+            'email' => 'ryuu2@example.com',
             'password' => hash::make('12345678'),
             'role' => 'admin'
         ]);
