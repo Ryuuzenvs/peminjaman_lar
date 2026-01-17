@@ -4,9 +4,9 @@ Pastikan di komputer sudah terinstall PHP >= 8.2, Composer, dan MySQL/MariaDB.
 1. Clone Proyek
 
 Buka terminal, lalu jalankan perintah:
-Bash
 
 git clone https://github.com/Ryuuzenvs/peminjaman_lar.git
+
 cd peminjaman_lar
 
 1.1 opsional(kalau gabisa git clone) : instal zip, esktrak.
@@ -14,16 +14,17 @@ cd peminjaman_lar
 2. Install Dependencies
 
 Instal semua library Laravel yang dibutuhkan melalui Composer:
-Bash
+
 
 composer install
 
 3. Konfigurasi Environment (.env)
 
 Laravel membutuhkan file .env untuk pengaturan database. Salin dari file contoh:
-Bash
 
 cp .env.example .env
+
+atau bisa copy aja file .env.example
 
 Setelah itu, buka file .env dan sesuaikan bagian ini:
 Plaintext
@@ -38,18 +39,16 @@ DB_PASSWORD=                   <-- Sesuaikan dengan password DB kamu
 4. Generate App Key
 
 Ini wajib agar aplikasi bisa berjalan dan enkripsi session aktif:
-Bash
 
 php artisan key:generate
 
 5. Setup Database & Migrasi
 
 Buat database baru di phpMyAdmin/Terminal dengan nama db_peminjaman_lar. Lalu, jalankan migrasi tabel beserta data awal:
-Bash
 
 php artisan migrate
 
-opsional : isi data field user otomatis dengan seeder 
+opsional : isi data field user otomatis dengan seeder (langsung bisa login)
 
 php artisan db:seed
 
