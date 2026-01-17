@@ -9,7 +9,7 @@ Bash
 git clone https://github.com/Ryuuzenvs/peminjaman_lar.git
 cd peminjaman_lar
 
-1.1 opsional : instal zip, esktrak.
+1.1 opsional(kalau gabisa git clone) : instal zip, esktrak.
 
 2. Install Dependencies
 
