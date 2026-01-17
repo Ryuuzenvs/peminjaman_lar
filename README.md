@@ -1,6 +1,8 @@
 Panduan Menjalankan Proyek (Running Guide)
 
 Pastikan di komputer sudah terinstall PHP >= 8.2, Composer, dan MySQL/MariaDB.
+
+note : pastiin letakin proyek ini di dalam htdocs(root localserver, proyek localserver) biar bisa di akses kayak biasa
 1. Clone Proyek
 
 Buka terminal, lalu jalankan perintah:
