@@ -17,30 +17,29 @@ public function showlogin()
     }
 
 //req param
-//$ validt, if lolos auth attmp, regret sesio, =>
+//$ validt, if credentials auth attmp, regret sesio, =>
 // $ role, role return
 // else back
-public function login(Request $request)
-    {
-        //
-        $lolos = $request->validate([
-'name' => 'required',
-'password' => 'required'
-]);
 
-if(Auth::attempt($lolos)){
+public function login(Request $request) {
+    $credentials = $request->only('username', 'password');
+    $role = $request->role; // 'admin', 'officer',  'borrower'
+
+    // guard on $, att $
+    //req ses genert
+    if (Auth::guard($role)->attempt($credentials)) {
         $request->session()->regenerate();
+        $user = Auth::guard($role)->user();
+		\App\Models\ActivityLog::create([
+            'data' => "[AUTH] User [ id : " . $user->id . " ] dengan [ usn : ". $request->username. "] login sebagai [" . strtoupper($role) . "]"
+        ]);
         
-//       $ auth table name, role
-        $role = Auth::user()->role;
-//      ret red rout
-        if($role == 'admin') return redirect()->route('admin.dashboard');
-        if($role == 'petugas') return redirect()->route('petugas.dashboard');
-        return redirect()->route('peminjam.dashboard');
-        }
-     return back()->with('error', 'wrong password or usn, try login');
+        // Redirect rel $ role
+        return redirect()->intended($role . '/dashboard');
     }
 
+    return back()->with('error', 'Login gagal, periksa email/password dan role.');
+}
 public function logout(){
 //session()->destroy
 Auth::logout();

@@ -13,27 +13,9 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'peminjam',
-            'email' => 'ryuu1@example.com',
-            'password' => hash::make('12345678'),
-            'role' => 'peminjam'
-        ]);
-        User::factory()->create([
-            'name' => 'owner',
-            'email' => 'ryuu2@example.com',
-            'password' => hash::make('12345678'),
-            'role' => 'admin'
-        ]);
-        User::factory()->create([
-            'name' => 'petugas',
-            'email' => 'ryuuown@example.com',
-            'password' => hash::make('12345678'),
-            'role' => 'petugas'
-        ]);
-    }
+    public function run() {
+    \App\Models\Admin::create(['username' => 'Admin', 'email' => 'admin@test.com', 'password' => bcrypt('123')]);
+    \App\Models\Officer::create(['username' => 'Petugas', 'email' => 'petugas@test.com', 'password' => bcrypt('123')]);
+    \App\Models\Borrower::create(['username' => 'Siswa', 'email' => 'siswa@test.com', 'password' => bcrypt('123')]);
+}
 }

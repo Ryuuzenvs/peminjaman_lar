@@ -36,11 +36,11 @@ return [
     */
 
     'guards' => [
-    'web' => [ 'driver' => 'session', 'provider' => 'users' ], // Tetap biarkan default
-    'admin' => [ 'driver' => 'session', 'provider' => 'admins' ],
-    'officer' => [ 'driver' => 'session', 'provider' => 'officers' ],
-    'borrower' => [ 'driver' => 'session', 'provider' => 'borrowers' ],
-],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,17 +60,19 @@ return [
     */
 
     'providers' => [
-    'users' => [ 'driver' => 'eloquent', 'model' => App\Models\User::class ],
-    'admins' => [ 'driver' => 'eloquent', 'model' => App\Models\Admin::class ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\User::class),
+'admins' => [ 'driver' => 'eloquent', 'model' => App\Models\Admin::class ],
     'officers' => [ 'driver' => 'eloquent', 'model' => App\Models\Officer::class ],
     'borrowers' => [ 'driver' => 'eloquent', 'model' => App\Models\Borrower::class ],
-],
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    //],
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -26,18 +26,18 @@
                     <td>{{ $u->email }}</td>
                     <td><span class="badge bg-secondary">{{ strtoupper($u->role) }}</span></td>
                     <td>
-    @if($u->id != auth()->id())
-        <form method="post" action="{{ route('users.destroy', $u->id) }}?role={{ $u->role }}" style="display:inline">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus user ini?')">Hapus</button>
-        </form>
 
-        <a href="{{ route('users.edit', [$u->id, 'role' => $u->role]) }}" class="btn btn-warning btn-sm">edit</a>
-    @else
-        <span class="text-muted small italic">Logged In</span>
-    @endif
-</td>
+                        @if($u->id != auth()->id())
+                        <form method="post" action="{{ route('users.destroy', $u->id) }}" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus user ini?')">Hapus</button>
+                        </form>
+                        <a href="{{ route('users.edit', $u->id) }}" class="btn btn-warning btn-sm">edit</a>
+                        @else
+                        <span class="text-muted small italic">Logged In</span>
+                        @endif
+                    </td>
                 </tr>
                 @empty
                 <tr>

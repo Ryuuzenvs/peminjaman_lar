@@ -31,4 +31,3 @@ public function approver() {
 public function tool() {
     return $this->belongsTo(tool::class, 'tool_id');
 }
-}

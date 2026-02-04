@@ -186,9 +186,7 @@ public function update(Request $request, $id)
 {
 
     $loan = loan::findOrFail($id);
-$user = Auth::user() 
-            ?? auth()->guard('admin')->user() 
-            ?? auth()->guard('officer')->user();
+$user = Auth::user();
 if (!$user) return redirect()->route('login')->with('error', 'Login dulu bro!');
 
     if ($request->has('action') && $request->action == 'return') {

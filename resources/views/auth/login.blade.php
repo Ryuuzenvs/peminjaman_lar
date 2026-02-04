@@ -25,17 +25,19 @@
                 @csrf
                 <div class="mb-3">
                     <label class="form-label"> usn</label>
-                    <input type="text" name="name" class="form-control" placeholder="exam" required>
+                    <input type="text" name="username" class="form-control" placeholder="exam" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="123" required>
                 </div>
+				<select name="role" class="form-control" required>
+    <option value="admin">Admin</option>
+    <option value="officer">Petugas</option>
+    <option value="borrower">Peminjam</option>
+</select>
                 <button type="submit" class="btn btn-primary w-100" id="loginBtn">Login</button>
-            </form>
-            <div class="text-center mt-3">
-                <small>Belum punya akun? <a href="{{route('signup')}}">Daftar</a></small>
-            </div>
+            </form> 
         </div>
     </div>
 <script>

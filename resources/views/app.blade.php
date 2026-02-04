@@ -10,22 +10,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
 
 <div class="container">
-<a class="navbar-brand" href="{{auth()->user()->dashboardUrl()}}
-">PinjamAlat</a>
+	@php
+    // var guard login
+    $user = auth()->guard('admin')->user() 
+            ?? auth()->guard('officer')->user() 
+            ?? auth()->guard('borrower')->user();
+@endphp
+<a class="navbar-brand" href="{{ $user ? $user->dashboardUrl() : '#' }}">
+    PinjamAlat
+</a>
+
 <div class="navbar-nav">
-
-    <a class="nav-link {{ auth()->user()->role != 'admin' ? 'disabled text-muted' : '' }}" 
-       href="{{ route('category.index') }}">Category</a>
-
-    <a class="nav-link {{ auth()->user()->role != 'admin' ? 'disabled text-muted' : '' }}" 
-       href="{{ route('tools.index') }}">Tool</a>
-
-    <a class="nav-link {{ auth()->user()->role != 'admin' ? 'disabled text-muted' : '' }}" 
-       href="{{ route('users.index') }}">User</a>
-
-    <a class="nav-link {{ auth()->user()->role != 'admin' ? 'disabled text-muted' : '' }}" 
-        href="{{ route('admin.loans.index') }}">Loan</a>
-    
+    @if(auth()->guard('admin')->check())
+        <a class="nav-link" href="{{ route('category.index') }}">Category</a>
+        <a class="nav-link" href="{{ route('tools.index') }}">Tool</a>
+        <a class="nav-link" href="{{ route('users.index') }}">User</a>
+        <a class="nav-link" href="{{ route('admin.loans.index') }}">Loan</a>
+<a class="nav-link" href="{{ route('admin.logs.index') }}">Logs</a>
+    @elseif(auth()->guard('officer')->check())
+        <a class="nav-link" href="{{ route('petugas.dashboard') }}">Dashboard</a>
+        <a class="nav-link" href="{{ route('petugas.report') }}">Laporan</a>
+    @else
+        <a class="nav-link" href="{{ route('peminjam.dashboard') }}">My Loans</a>
+    @endif
     <form action="{{ route('logout') }}" method="post" class="d-inline">
         @csrf
         <button type="submit" class="btn btn-link nav-link">Logout</button>

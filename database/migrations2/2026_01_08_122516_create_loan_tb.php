@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-    $table->foreignId('borrower_id')->constrained('borrowers'); 
-    $table->foreignId('tool_id')->constrained('tools');
-    $table->unsignedBigInteger('approved_by')->nullable(); 
-    $table->string('approver_type')->nullable(); 
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('tool_id')->constrained();
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->date('date_loan');
             $table->integer('penalty')->default(0);
             $table->date('return_date')->nullable();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loans');
+        Schema::dropIfExists('loan_tb');
     }
 };

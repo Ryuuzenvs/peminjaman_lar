@@ -11,7 +11,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Tambahkan baris ini untuk mendaftarkan alias middleware kamu
 //$ mid->alias [role => path rolemanager:class] 
         $middleware->alias([
         'role' => \App\Http\Middleware\RoleManager::class,]);
