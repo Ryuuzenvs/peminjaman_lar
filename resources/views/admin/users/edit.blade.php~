@@ -12,7 +12,7 @@
             
             <div class="mb-3">
                 <label class="form-label">Nama Lengkap</label>
-                <input type="text" name="username" class="form-control" value="{{ $user->name }}" required>
+                <input type="text" name="username" class="form-control" value="{{ $user->username }}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Email</label>

@@ -13,7 +13,6 @@ protected $fillable = [
         'category_id',
         'name_tools',
         'stock',
-'condition'
     ];
 
 // in tool cls

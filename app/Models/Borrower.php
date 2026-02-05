@@ -13,4 +13,9 @@ class Borrower extends Authenticatable
 public function dashboardUrl() {
     return route('peminjam.dashboard');
 }
+
+public function getRoleAttribute() {
+    return 'borrower';
+}
+
 }

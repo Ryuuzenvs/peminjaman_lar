@@ -15,4 +15,8 @@ public function dashboardUrl() {
     return route('petugas.dashboard');
 }
 
+public function getRoleAttribute() {
+    return 'officer'; 
+}
+
 }

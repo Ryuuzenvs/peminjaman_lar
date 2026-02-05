@@ -40,11 +40,15 @@ public function login(Request $request) {
 
     return back()->with('error', 'Login gagal, periksa email/password dan role.');
 }
-public function logout(){
-//session()->destroy
-Auth::logout();
-return redirect()->route('login');
+public function logout(Request $request) {
+    Auth::guard('admin')->logout();
+    Auth::guard('officer')->logout();
+    Auth::guard('borrower')->logout();
 
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login');
 }
 
 

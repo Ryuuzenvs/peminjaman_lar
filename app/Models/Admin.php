@@ -11,6 +11,10 @@ class Admin extends Authenticatable {
     
     public function dashboardUrl() {
     return route('admin.dashboard');
-}
+    }
+    
+    public function getRoleAttribute() {
+    return 'admin'; 
+    }
 }
 

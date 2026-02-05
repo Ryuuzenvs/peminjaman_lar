@@ -25,7 +25,7 @@
             <div class="mb-3">
                 <label class="form-label">Role</label>
                 <select name="role" class="form-control" required>
-                    <option selected>pilih role</option>
+                    <option>pilih role</option>
                     <option value="borrower" {{ $user->role == 'peminjam' ? 'selected' : '' }}>Peminjam</option>
                     <option value="officer" {{ $user->role == 'petugas' ? 'selected' : '' }}>Petugas</option>
                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
