@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tool;
-use App\Models\Loan;
+use App\Models\tool;
+use App\Models\loan;
 use App\Models\Borrower;
 
 //use ilum.supp.fas.db n auth
@@ -18,15 +18,15 @@ class LoanController extends Controller
     //
     public function adminIndex() {
    
-    $loans = Loan::with(['borrower', 'tool'])->latest()->get();
+    $loans = loan::with(['borrower', 'tool'])->latest()->get();
     return view('admin.loans.index', compact('loans'));
 }
 
     public function petugasIndex(){
 //    $ tools = tool:wher(stok,>,0)>get()
-    $tools = Tool::where('stock', '>' ,0)->get();
+    $tools = tool::where('stock', '>' ,0)->get();
 //    $ loan  = loan:wher(us_id, auth::id())>with('tool')>last()>get()
-$loans = Loan::with(['user', 'tool'])->latest()->get();
+$loans = \App\Models\loan::with(['user', 'tool'])->latest()->get();
 // ret view (pem.ind, comp var)
     return view('petugas.index', compact('tools', 'loans'));
     }

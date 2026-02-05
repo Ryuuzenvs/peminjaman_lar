@@ -26,7 +26,7 @@ class LoanController extends Controller
 //    $ tools = tool:wher(stok,>,0)>get()
     $tools = tool::where('stock', '>' ,0)->get();
 //    $ loan  = loan:wher(us_id, auth::id())>with('tool')>last()>get()
-$loans = \App\Models\loan::with(['user', 'tool'])->latest()->get();
+$loans = \App\Models\loan::with(['borrower', 'tool'])->latest()->get();
 // ret view (pem.ind, comp var)
     return view('petugas.index', compact('tools', 'loans'));
     }

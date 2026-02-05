@@ -16,7 +16,7 @@
     <tbody>
         @foreach($loans as $l)
         <tr>
-            <td>{{ $l->borrower->username }}</td>
+            <td>{{ $l->borrower->name }}</td>
 <td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
             <td>
     {{ \Carbon\Carbon::parse($l->date_loan)->format('d M Y') }}
