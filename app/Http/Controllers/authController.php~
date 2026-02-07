@@ -43,7 +43,7 @@ public function login(Request $request) {
 public function logout(Request $request) {
     $roles = ['admin', 'officer', 'borrower'];
     foreach ($roles as $role) {
-        //cheking
+        //cheking 
         if(Auth::guard($role)->check()){
             Auth::guard($role)->logout();
         }

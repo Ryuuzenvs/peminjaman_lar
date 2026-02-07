@@ -27,7 +27,7 @@ abrt 403
         if(auth()->guard('officer')->check()) $user = "Officer";
         if(auth()->guard('borrower')->check()) $user = "Borrower";
 
-        abort(403, "Akses Ditolak: Anda login sebagai $user, tapi butuh akses $role");
+        abort(403, "Akses Ditolak: Anda login sebagai $siapaYangLogin, tapi butuh akses $role");
     }
 
     return $next($request);
