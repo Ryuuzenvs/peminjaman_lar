@@ -18,13 +18,13 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    /*public function boot(): void
+    public function boot(): void
     {
         //
 Relation::enforceMorphMap([
-        'admin' => 'App\Models\Admins',
+        'admin' => 'App\Models\Admin',
         'officer' => 'App\Models\Officer',
         'borrower' => 'App\Models\Borrower',
     ]);
-    }*/
+    }
 }

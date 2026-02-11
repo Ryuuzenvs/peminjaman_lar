@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
+
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +22,11 @@ abrt 403
      */
     public function handle(Request $request, Closure $next, $role): Response
 {
+        $user = $request->user;
     // Cek user login di guard yang diminta
-    if (!auth()->guard($role)->check()) {
-        $user = "Guest";
-        if(auth()->guard('admin')->check()) $user = "Admin";
-        if(auth()->guard('officer')->check()) $user = "Officer";
-        if(auth()->guard('borrower')->check()) $user = "Borrower";
-
-        abort(403, "Akses Ditolak: Anda login sebagai $user, tapi butuh akses $role");
+    if (!Auth::guard($role)->check()) {
+        abort(403, "Akses Ditolak: Anda tidak punya akses sebagai $role");
     }
-
     return $next($request);
     }   
 }

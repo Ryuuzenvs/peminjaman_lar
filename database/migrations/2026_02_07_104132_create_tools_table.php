@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -14,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
-//            constrai otom sea to tb, on del cascad categ
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+//foreg cat_id
+            $table->foreignId('category_id');
+//str name
             $table->string('name_tools');
-            $table->integer('stock');
-//            $table->enum('condition', ['baik', 'buruk'])->nullable();
-           $table->softDeletes();
+//stock int
+            $table->integer('stock')->default(0);
             $table->timestamps();
+           $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tools_tb');
+        Schema::dropIfExists('tools');
     }
 };

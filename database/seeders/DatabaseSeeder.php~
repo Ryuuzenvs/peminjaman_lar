@@ -1,9 +1,15 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Borrower;
+use App\Models\Officer;
+use App\Models\category;
+use App\Models\tool;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Hash;;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,14 +19,31 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run() {
-    //\App\Models\Admin::create(['username' => 'Admin', 'email' => 'admin@test.com', 'password' => bcrypt('123')]);
-    //\App\Models\Officer::create(['username' => 'Petugas', 'email' => 'petugas@test.com', 'password' => bcrypt('123')]);
-    //\App\Models\Borrower::create(['username' => 'Siswa', 'email' => 'siswa@test.com', 'password' => bcrypt('123')]);
+    public function run(): void
+    {
+        User::factory(10)->create();
+/*
+$kategoris = [
+['nama_kategori' => 'alat tulis'],
+['nama_kategori' => 'alat berat'],
+['nama_kategori' => 'alat pembersih']
+];
 
-$this->call([
-        CategorySeeder::class,
-        ToolSeeder::class,
-    ]);
+foreach($kategoris as $kategori){
+category::create($kategori);
+};
+
+$alats = [
+['name_tools' => 'pensil', 'category_id'=> 1, 'stock'=>'10'],
+['name_tools' => 'berat', 'category_id'=> 2, 'stock'=>'10'],
+['name_tools' => 'sapu', 'category_id'=> 3, 'stock'=>'10'],
+];
+
+foreach($alats as $alat){
+tool::create($alat);
+};
+*/
+
+    }
 }
-}
+

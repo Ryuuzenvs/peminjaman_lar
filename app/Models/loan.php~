@@ -23,7 +23,7 @@ public function borrower() {
 }
 
 public function approver() {
-    return $this->belongsTo(User::class, 'approve_by'); 
+    return $this->belongsTo(User::class, 'approved_by'); 
 }
 
 public function tool() {

@@ -31,7 +31,7 @@
         <a class="nav-link" href="{{ route('officer.dashboard') }}">Dashboard</a>
         <a class="nav-link" href="{{ route('officer.report') }}">Laporan</a>
     @else
-        <a class="nav-link" href="{{ route('borrower.dashboard') }}">My Loans</a>
+        <a class="nav-link" href="{{ route('peminjam.dashboard') }}">My Loans</a>
     @endif
     <form action="{{ route('logout') }}" method="post" class="d-inline">
         @csrf

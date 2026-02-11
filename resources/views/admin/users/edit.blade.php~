@@ -8,7 +8,7 @@
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
-                <input type="hidden" name="role" value="{{ $role }}">
+                <input type="hidden" name="role" value="{{ $user->role  }}">
             
             <div class="mb-3">
                 <label class="form-label">Nama Lengkap</label>
@@ -25,7 +25,7 @@
             <div class="mb-3">
                 <label class="form-label">Role</label>
                 <select name="role" class="form-control" required>
-                    <option selected>pilih role</option>
+                    <option>pilih role</option>
                     <option value="borrower" {{ $user->role == 'peminjam' ? 'selected' : '' }}>Peminjam</option>
                     <option value="officer" {{ $user->role == 'petugas' ? 'selected' : '' }}>Petugas</option>
                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>

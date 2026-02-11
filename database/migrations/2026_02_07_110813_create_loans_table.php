@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-    $table->foreignId('borrower_id')->constrained('borrowers'); 
-    $table->foreignId('tool_id')->constrained('tools');
-    $table->unsignedBigInteger('approved_by')->nullable(); // ID Petugas/Admin yang approve
-    $table->string('approver_type')->nullable(); // 'admin' atau 'officer'
-    // ... sisa kolom lainnya (date_loan, status, dll)
-            $table->date('date_loan');
+            $table->foreignId('borrower_id')->constrained('users');
+            $table->foreignId('tool_id')->constrained('tools');
+            $table->foreignId('approve_by')->nullable()->constrained('users')->onDelete('set Null');
+            $table->enum('approve_type',['admin', 'officer'])->nullable();
+            $table->enum('status',['pending', 'borrow', 'return'])->default('pending');
             $table->integer('penalty')->default(0);
             $table->date('return_date')->nullable();
-            $table->enum('status', ['pend', 'borro', 'return'])->default('pend');
+            $table->date('loan_date');
             $table->timestamps();
         });
     }
@@ -31,6 +30,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loan_tb');
+        Schema::dropIfExists('loans');
     }
 };
+
+

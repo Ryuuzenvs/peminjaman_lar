@@ -11,11 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kategori');
-            $table->timestamps();
-        });
+//trig
+        //db:unpre "" triger name. where, ins tabel  for row 
+// begin
+// upd tabel, set var stck,
+//end
+
+DB::unprepered ("create kurangi_stok_alat
+afte insert into loans
+for each row
+begin
+update tools set stock = stock -1 where id = new.tool_id;
+end
+");
     }
 
     /**
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories_tb');
+        //
     }
 };

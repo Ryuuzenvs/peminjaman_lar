@@ -64,7 +64,7 @@ return back()->with('success', 'created');
     {
         //
 $category = category::all();
-$tools = tool::findOrFail($id);
+$tools = \App\Models\tool::findOrFail($id);
         return view('admin.tools.edit', compact('tools', 'category'));
     }
 

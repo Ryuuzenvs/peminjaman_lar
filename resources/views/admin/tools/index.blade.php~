@@ -34,7 +34,7 @@
 @csrf
 
 <button class="btn btn-danger btn-sm">Hapus</button>
-<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning">edit<a/>
+<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning">edit bang<a/>
 </form>
 </td>
 </tr>

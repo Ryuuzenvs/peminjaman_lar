@@ -20,7 +20,7 @@ class LoanController extends Controller
     //
     public function adminIndex() {
 //   data by class bor, tool, lat get
-    $loans = loan::with(['borrower', 'tool', 'approver'])->latest()->get();
+    $loans = loan::with(['borrower', 'tool', 'approved_by'])->latest()->get();
     return view('admin.loans.index', compact('loans'));
 }
 

@@ -24,22 +24,37 @@ public function showlogin()
 public function login(Request $request) {
     $credentials = $request->only('username', 'password');
     $role = $request->role; // 'admin', 'officer',  'borrower'
+$roleValid = ['admin', 'officer', 'borrower'];
+if(!in_array($role, $roleValid)){
+return back()->with('eror', 'choose role or role invalid');
+}
 
     // guard on $, att $
     //req ses genert
     if (Auth::guard($role)->attempt($credentials)) {
         $request->session()->regenerate();
         $user = Auth::guard($role)->user();
-		ActivityLog::create([
-            'data' => "[AUTH] User [ id : " . $user->id . " ] dengan [ usn : ". $request->username. "] login sebagai [" . strtoupper($role) . "]"
-        ]);
-        
-        // Redirect rel $ role
-        return redirect()->($role . '/dashboard');
-    }
+        $msg = "[AUTH] User [ id : " . $user->id . " ] dengan [ usn : ". $request->username. "] login sebagai [" . strtoupper($role) . "]";
+//if($role == 'admin') {
+//$msg  = "bos ada yang mantau";
+//};
 
-    return back()->with('error', 'Login gagal, periksa email/password dan role.');
+ActivityLog::create([
+            'data' => $msg
+        ]);
+
+
+        // Redirect rel $ role
+//Route::get('/admin/logs', [ActivityLogController::class, 'index'])->name('admin.logs.index');
+/*if ($role == 'admin'){
+        return redirect()->route('admin.logs.index');    
+    } else {
+        }*/
+return redirect()->route($role . '.dashboard');
+   }
+    return back()->with('error', 'Login fail, ' . $request->username . ' doesnt registered in database or wrong password ');
 }
+
 public function logout(Request $request) {
     $roles = ['admin', 'officer', 'borrower'];
     foreach ($roles as $role) {
@@ -49,9 +64,9 @@ public function logout(Request $request) {
         }
      }
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+//    $request->session()->invalidate();
+  //  $request->session()->regenerateToken();
 
     return redirect()->route('login');
-}
+    }
 }

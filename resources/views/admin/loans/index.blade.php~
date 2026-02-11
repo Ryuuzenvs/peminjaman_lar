@@ -37,7 +37,7 @@
                         <td><strong>{{ $l->borrower->username }}</strong></td>
                         <td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
                         <td>{{ \Carbon\Carbon::parse($l->date_loan)->format('d M Y')}}</td>
-                        <td>{{ 'belum ada data'  ?? \Carbon\Carbon::parse($l->return_date)->format('d M Y')}}</td>
+                        <td>{{ \Carbon\Carbon::parse($l->return_date)->format('d M Y') ?? 'belum ada data' }}</td>
                         <td>
                             @php $deadline = \Carbon\Carbon::parse($l->date_loan)->addDays(3); @endphp
                             <span class="badge {{ now() > $deadline && $l->status != 'return' ? 'bg-danger' : 'bg-info' }}">

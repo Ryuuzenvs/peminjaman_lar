@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:NLh0eybWuTFngQblmAvGEPr+Rr5BG1F1DPDDfSApZj8=
 APP_DEBUG=true
-APP_URL=http://10.243.31.92/lar-peminjaman/public/
+APP_URL=http://localhost/lar-peminjaman/public/
 
 APP_LOCALE=en
 APP_FALLBACK_LOCALE=en

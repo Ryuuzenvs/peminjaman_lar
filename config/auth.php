@@ -37,9 +37,9 @@ return [
 
     'guards' => [
     'web' => [ 'driver' => 'session', 'provider' => 'users' ], 
-    'admin' => [ 'driver' => 'session', 'provider' => 'admins' ],
-    'officer' => [ 'driver' => 'session', 'provider' => 'officers' ],
-    'borrower' => [ 'driver' => 'session', 'provider' => 'borrowers' ],
+    'admin' => [ 'driver' => 'session', 'provider' => 'users' ], 
+    'officer' => [ 'driver' => 'session', 'provider' => 'users' ], 
+    'borrower' => [ 'driver' => 'session', 'provider' => 'users' ], 
 ],
 
     /*
@@ -61,9 +61,6 @@ return [
 
     'providers' => [
     'users' => [ 'driver' => 'eloquent', 'model' => App\Models\User::class ],
-    'admins' => [ 'driver' => 'eloquent', 'model' => App\Models\Admin::class ],
-    'officers' => [ 'driver' => 'eloquent', 'model' => App\Models\Officer::class ],
-    'borrowers' => [ 'driver' => 'eloquent', 'model' => App\Models\Borrower::class ],
 ],
 
         // 'users' => [
