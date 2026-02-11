@@ -90,6 +90,7 @@ public function store(Request $request) {
 	]);
 
 // LOGGING
+/*
         ActivityLog::create([
             'data' => "[PINJAM] $borrowerName meminjam alat: $tool->name_tools (ID Pinjam: $loan->id)"
         ]);
@@ -99,9 +100,11 @@ public function store(Request $request) {
 			return back()->with('success', 'Berhasil meminjam alat!');
 			
         } catch (\Exception $e){
+*/
+
 //db rb
 DB::rollback    ();
-dd($e->getMessage());
+//dd($e->getMessage());
 return back()->with('error',$e->getMessage());
         }
     }
@@ -116,7 +119,7 @@ $loan = loan::with('borrower', 'tool')->findOrFail($id);
 $approver = Auth::user();
     
 $loan->update([
-'status' => 'borro',
+'status' => 'borrow',
 'approved_by' => $approver->id,
 ]);
 
@@ -142,7 +145,7 @@ public function returnTool($id) {
         $tool = tool::findOrFail($loan->tool_id); 
 
         $loandate = Carbon::parse($loan->loan_date);
-        $returndate = now();
+        $returndate = Carbon::now();
         $selisih = $loandate->diffInDays($returndate);
 
         $denda = 0;
@@ -164,6 +167,7 @@ public function returnTool($id) {
         
     } catch (\Exception $e) { 
         DB::rollback(); 
+        dd($e->getMessage());
         return back()->with('error', $e->getMessage());
         }
     }
@@ -171,10 +175,14 @@ public function returnTool($id) {
 public function report(Request $request) {
     $query = loan::with(['borrower', 'tool']);
 
-    //  filter simpel jika ada req
+    //  simple filter  if there a req
     if ($request->status) {
         $query->where('status', $request->status);
     }
+        
+    $query->when($request->start_date && $request->end_date, function ($q) use ($request) {
+        return $q->whereBetween('loan_date', [$request->start_date, $request->end_date]);
+    });
 
     $reports = $query->latest()->get();
     return view('petugas.report', compact('reports'));
@@ -191,10 +199,8 @@ public function update(Request $request, $id)
 {
 
     $loan = loan::findOrFail($id);
-$user = Auth::user() 
-            ?? auth()->guard('admin')->user() 
-            ?? auth()->guard('officer')->user();
-if (!$user) return redirect()->route('login')->with('error', 'Login dulu bro!');
+$user = Auth::user();
+if (!$user) return redirect()->route('login')->with('error', 'Login!');
 
     if ($request->has('action') && $request->action == 'return') {
     return $this->returnTool($id, $user);

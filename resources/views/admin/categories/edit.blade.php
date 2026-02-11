@@ -3,7 +3,7 @@
 @section('content')
 <div class="card shadow-sm">
         <div class="card-body p-4">
-            <h3 class="text-center mb-4">edit</h3>
+            <h3 class="text-center mb-4">Edit</h3>
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -15,8 +15,8 @@
                     <input type="text" name="nama_kategori" class="form-control" value="{{$categories->nama_kategori}}" required>
                     
                 </div>
-                <button type="submit" class="btn btn-primary">edit</button>
-                <a href="{{route('category.index')}}" class="btn btn-warning">back</a>
+                <button type="submit" class="btn btn-primary"><i class='fa-solid fa-pen-to-square'></i></button>
+                <a href="{{route('category.index')}}" class="btn btn-warning"><i class='fas fa-arrow-left'></i></a>
             </form>
         </div>
     </div>

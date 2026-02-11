@@ -44,8 +44,8 @@
 @endempty
 
                 </div>
-                <button type="submit" class="btn btn-primary ">edit</button>
-                <a href="{{route('tools.index')}}" class="btn btn-warning">back</a>
+                <button type="submit" class="btn btn-primary "><i class='fa-solid fa-pen-to-square'></i></button>
+                <a href="{{route('tools.index')}}" class="btn btn-warning"><i class='fa-solid fa-arrow-left'></i></a>
             </form>
         </div>
     </div>

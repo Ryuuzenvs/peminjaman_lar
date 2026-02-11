@@ -13,8 +13,8 @@
                     <label class="form-label"> nama kategori</label>
                     <input type="text" name="nama_kategori" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary ">create</button>
-                <a href="{{route('category.index')}}" class="btn btn-warning">back</a>
+                <button type="submit" class="btn btn-primary "><i class='fa-solid fa-plus'></i></button>
+                <a href="{{route('category.index')}}" class="btn btn-warning"><i class='fas fa-arrow-left'></i></a>
             </form>
         </div>
     </div>

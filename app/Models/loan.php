@@ -17,13 +17,13 @@ class loan extends Model
     'status',
 ];
 
-// Relasi ke Peminjam
+// Relasi to borrower
 public function borrower() {
     return $this->belongsTo(User::class, 'borrower_id'); 
 }
 
 public function approver() {
-    return $this->belongsTo(User::class, 'approve_by'); 
+    return $this->belongsTo(User::class, 'approved_by'); 
 }
 
 public function tool() {

@@ -6,7 +6,7 @@
 <div class="card-header d-flex justify-content-between">
 
 <h5>Daftar Alat</h5>
-<a class="btn btn-warning btn-sm" href="{{route('admin.dashboard')}}">back </a>
+<a class="btn btn-warning btn-sm" href="{{route('admin.dashboard')}}"><i class='fa-solid fa-arrow-left'></i> </a>
 </div>
 
 <div class="card-body">
@@ -33,8 +33,8 @@
 @method('DELETE')
 @csrf
 
-<button class="btn btn-danger btn-sm">Hapus</button>
-<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning">edit<a/>
+<button class="btn btn-danger btn-sm"><i class='fa-solid fa-trash-can'></i></button>
+<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning"><i class='fa-solid fa-pen-to-square'></i><a/>
 </form>
 </td>
 </tr>
@@ -44,7 +44,7 @@
 </tr>
 @endforelse
 </tbody>
-<a class="btn btn-primary btn-sm" href="{{route('tools.create')}}">Tambah Alat</a>
+<a class="btn btn-primary btn-sm" href="{{route('tools.create')}}"><i class='fa-solid fa-plus'></i></a>
 </table>
 
 </div>

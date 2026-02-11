@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('borrower_id')->constrained('users');
             $table->foreignId('tool_id')->constrained('tools');
-            $table->foreignId('approve_by')->nullable()->constrained('users')->onDelete('set Null');
+            $table->foreignId('approved_by')->nullable()->constrained('users')->onDelete('set Null');
             $table->enum('approve_type',['admin', 'officer'])->nullable();
             $table->enum('status',['pending', 'borrow', 'return'])->default('pending');
             $table->integer('penalty')->default(0);

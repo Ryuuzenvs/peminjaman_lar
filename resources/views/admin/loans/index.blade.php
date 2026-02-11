@@ -19,6 +19,7 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
+                        <th>Id</th>
                         <th>Peminjam</th>
                         <th>Alat</th>
                         <th>Tgl Pinjam</th>
@@ -34,6 +35,7 @@
                 <tbody>
                     @foreach($loans as $l)
                     <tr>
+                        <td><strong>{{ $l->id }}</strong></td>
                         <td><strong>{{ $l->borrower->username }}</strong></td>
                         <td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
                         <td>{{ \Carbon\Carbon::parse($l->date_loan)->format('d M Y')}}</td>
@@ -62,8 +64,8 @@
                             <div class="btn-group">
                                 <form action="{{ route('loans.destroy', $l->id) }}" method="POST" onsubmit="return confirm('Hapus transaksi? Stok akan disesuaikan otomatis.')">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                <a href="{{ route('admin.loans.edit', $l->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                <a href="{{ route('admin.loans.edit', $l->id) }}" class="btn btn-warning btn-sm">	<i class="fa-solid fa-pen-to-square"></i></a>
                                 </form>
                             </div>
                         </td>

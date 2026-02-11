@@ -32,12 +32,12 @@
                 </span>
             </td>
             <td>
-                @if($l->status == 'pend')
+                @if($l->status == 'pending')
                     <form action="{{ route('loans.approve', $l->id) }}" method="POST">
                         @csrf @method('PUT')
                         <button class="btn btn-sm btn-primary">Approve</button>
                     </form>
-                @elseif($l->status == 'borro')
+                @elseif($l->status == 'borrow')
                     <form action="{{ route('loans.return', $l->id) }}" method="POST">
                         @csrf @method('PUT')
                         <button class="btn btn-sm btn-success">Terima Kembali</button>
