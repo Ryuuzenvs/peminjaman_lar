@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tool;
 use App\Models\category;
-use Illuminate\Database\Eloquent\SoftDeletes; 
+// use Illuminate\Database\Eloquent\SoftDeletes; 
 
 class ToolController extends Controller
 {
@@ -15,11 +15,11 @@ class ToolController extends Controller
     public function index()
     {
         // var tool get by mod tool, with(cate)-las-get
-    $tools = tool::with('category')->latest()->get();
-//    $ cat get by model cat::all
-$categories = category::all();
-//    ret viw tool ind, compact route
-    return view('admin.tools.index', compact('tools', 'categories'));
+        $tools = tool::with('category')->latest()->get();
+        //    $ cat get by model cat::all
+        $categories = category::all();
+        //    ret viw tool ind, compact route
+        return view('admin.tools.index', compact('tools', 'categories'));
     }
 
     /**
@@ -27,10 +27,9 @@ $categories = category::all();
      */
     public function create()
     {
-        //
-$category = \App\Models\category::all();
-    return view('admin.tools.create', compact('category') );
-    
+        //conf
+        $category = category::all();
+        return view('admin.tools.create', compact('category'));
     }
 
     /**
@@ -39,14 +38,14 @@ $category = \App\Models\category::all();
     public function store(Request $request)
     {
         //var req-valid array '[row tool]
-$data = $request->validate([
-    'name_tools' => 'required',
-    'stock'=> 'required|numeric',
-    'category_id' => 'required',
-    ]);
-//get app mod tool, create var
-\App\Models\tool::create($data);
-return back()->with('success', 'created');
+        $data = $request->validate([
+            'name_tools' => 'required',
+            'stock' => 'required|numeric',
+            'category_id' => 'required',
+        ]);
+        //get app mod tool, create var
+        tool::create($data);
+        return back()->with('success', 'created');
     }
 
     /**
@@ -63,8 +62,8 @@ return back()->with('success', 'created');
     public function edit(string $id)
     {
         //
-$category = category::all();
-$tools = tool::findOrFail($id);
+        $category = category::all();
+        $tools = tool::findOrFail($id);
         return view('admin.tools.edit', compact('tools', 'category'));
     }
 
@@ -73,16 +72,19 @@ $tools = tool::findOrFail($id);
      */
     public function update(Request $request, string $id)
     {
-        //
-    $request->validate([
-    'name_tools' => 'required',
-    'stock'=> 'required|numeric',
-    'category_id' => 'required',
-    ]);
-    $find = \App\Models\tool::findOrFail($id);
-$updatedata = $request->all();
-    $find->update($updatedata);
-return back()->with('success', 'updated');
+        //valid
+        $request->validate([
+            'name_tools' => 'required',
+            'stock' => 'required|numeric',
+            'category_id' => 'required',
+        ]);
+        //conf
+        $find = tool::findOrFail($id);
+
+        // res
+        $updatedata = $request->all();
+        $find->update($updatedata);
+        return back()->with('success', 'updated');
     }
 
     /**
@@ -91,7 +93,7 @@ return back()->with('success', 'updated');
     public function destroy(string $id)
     {
         //
-    \App\Models\tool::find($id)->delete();
-return back()->with('success', 'deleted');
+        tool::find($id)->delete();
+        return back()->with('success', 'deleted');
     }
 }

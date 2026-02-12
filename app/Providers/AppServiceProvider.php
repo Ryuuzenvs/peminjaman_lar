@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Pagination\Paginator; 
 
 use Illuminate\Support\ServiceProvider;
 
@@ -27,4 +28,13 @@ Relation::enforceMorphMap([
         'borrower' => 'App\Models\Borrower',
     ]);
     }*/
+
+    public function boot(): void
+{
+    Paginator::useBootstrapFive(); 
+    // Atau Paginator::useBootstrapFour(); jika Anda pakai Bootstrap 4
 }
+
+}
+
+

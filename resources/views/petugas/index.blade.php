@@ -19,15 +19,15 @@
             <td>{{ $l->borrower->username }}</td>
 <td>{{ $l->tool->name_tools ?? 'Alat Dihapus' }}</td>
             <td>
-    {{ \Carbon\Carbon::parse($l->date_loan)->format('d M Y') }}
+    {{ \Carbon\Carbon::parse($l->loan_date)->format('d M Y') }}
             </td>
 <td>
     <span class="badge {{ now() > \Carbon\Carbon::parse($l->date_loan)->addDays(3) ? 'bg-danger' : 'bg-info' }}">
-        {{ \Carbon\Carbon::parse($l->date_loan)->addDays(3)->format('d M Y') }}
+        {{ \Carbon\Carbon::parse($l->loan_date)->addDays(3)->format('d M Y') }}
     </span>
 </td>
             <td>
-                <span class="badge {{ $l->status == 'pend' ? 'bg-warning' : ($l->status == 'borro' ? 'bg-info' : 'bg-success') }}">
+                <span class="badge {{ $l->status == 'pending' ? 'bg-warning' : ($l->status == 'borrow' ? 'bg-info' : 'bg-success') }}">
                     {{ $l->status }}
                 </span>
             </td>
@@ -43,7 +43,7 @@
                         <button class="btn btn-sm btn-success">Terima Kembali</button>
                     </form>
                 @else
-                    <span class="text-muted">Selesai (Denda: {{ $l->penalty }})</span>
+                    <span class="text-muted">Selesai (Denda: Rp.{{ $l->penalty }})</span>
                 @endif
             </td>
         </tr>

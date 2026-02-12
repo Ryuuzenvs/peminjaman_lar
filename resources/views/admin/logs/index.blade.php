@@ -34,10 +34,10 @@
                     </tr>
                     @endforelse
                 </tbody>
-            </table>
+            </table> 
         </div>
 
-        <div class="mt-3">
+        <div class="d-flex justify-content-center align-items-center">
             {{ $logs->links() }}
         </div>
     </div>

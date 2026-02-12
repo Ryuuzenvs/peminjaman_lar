@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -23,7 +24,7 @@ class UserController extends Controller
     public function index()
     {
         //get all comp user
-    $users = User::all();
+    $users = User::where('role','!=' ,'admin')->get();
     return view('admin.users.index', compact('users'));
     }
 
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //ret
 return view('admin.users.create');
     }
 
@@ -41,7 +42,7 @@ return view('admin.users.create');
      */
 public function store(Request $request)
 {
-//valid
+//valid 
     $data = $request->validate([
         'username' => 'required',
         'email' => 'required',
@@ -50,7 +51,7 @@ public function store(Request $request)
     ]);
 
 //enc
-    $data['password'] = bcrypt($request->password); 
+    $data['password'] = Hash::make($request->password); 
     
 //create data
     User::create($data);
@@ -106,9 +107,10 @@ public function destroy(Request $request, $id)
     {
     $role = $request->query('role'); 
 //    $modelName = $this->getModel($role);
-    
-    // Proteksi sederhana agar tidak hapus diri sendiri (jika admin)
-    if ($role === 'admin' && $user->id == auth()->id()) {
+    $user = User::findOrFail($id);
+
+    // simp protect fail
+    if ( $user == auth()->id() && $role === 'admin') {
         return back()->with('error', 'Tidak bisa menghapus akun sendiri');
     }
 

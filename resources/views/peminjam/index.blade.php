@@ -17,7 +17,7 @@
                     <tbody>
                         @forelse($tools as $t)
                         <tr>
-                            <td>{{ $t->name_tools }}</td>
+                            <td>{{ $t->name_tools ?? 'Alat Dihapus'}}</td>
                             <td><span class="badge bg-info">{{ $t->stock }}</span></td>
                             <td>
                                 <form action="{{ route('pinjam.store') }}" method="POST">
@@ -45,7 +45,7 @@
                 <ul class="list-group">
                     @forelse($myloan as $loan)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        {{ $loan->tool->name_tools }} |
+                        {{ $loan->tool->name_tools ?? 'Alat Dihapus' }} |
                         {{ $loan->loan_date}}
                         <span class="badge bg-warning text-dark">{{ $loan->status }}</span>
                     </li>

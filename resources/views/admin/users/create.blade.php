@@ -31,12 +31,14 @@
                     <option> pilih role</option>
                     <option value="borrower">Peminjam</option>
                     <option value="officer">Petugas</option>
-                    <option value="admin">Admin</option>
+                    <option disabled value="">Admin</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-            <a href="{{ route('users.index') }}" class="btn btn-warning">back</a>
+            <button type="submit" class="btn btn-primary"><i class='fa-solid fa-plus'></i>
+</button>
+            <a href="{{ route('users.index') }}" class="btn btn-warning"><i class='fas fa-arrow-left'></i></a>
         </form>
     </div>
 </div>
 @endsection
+

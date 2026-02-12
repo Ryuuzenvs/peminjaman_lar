@@ -48,7 +48,7 @@
                 @foreach($reports as $r)
                 <tr>
                     <td>{{ $r->borrower->username }}</td>
-                    <td>{{ $r->tool->name_tools }}</td>
+                    <td>{{ $r->tool->name_tools ?? 'alat dihapus' }}</td>
                     <td>{{ $r->loan_date }}</td>
                     <td>{{ $r->return_date ?? '-' }}</td>
                     <td>{{ strtoupper($r->status) }}</td>

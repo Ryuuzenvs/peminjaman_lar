@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
 //foreg cat_id
-            $table->foreignId('category_id');
-//str name
+            $table->foreignId('category_id')->constrained('categories');
             $table->string('name_tools');
 //stock int
             $table->integer('stock')->default(0);

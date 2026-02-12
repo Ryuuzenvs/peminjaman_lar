@@ -15,9 +15,9 @@
 
 <tr>
 <th>Nama Alat</th>
-                    <th>Kategori</th>
-                    <th>Stok</th>
-                    <th>Aksi</th>
+<th>Kategori</th>
+<th>Stok</th>
+<th>Aksi</th>
 </tr>
 
 </thead>
@@ -34,7 +34,7 @@
 @csrf
 
 <button class="btn btn-danger btn-sm"><i class='fa-solid fa-trash-can'></i></button>
-<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning"><i class='fa-solid fa-pen-to-square'></i><a/>
+<a href="{{route('tools.edit', $t->id)}}" class="btn btn-warning"><i class='fa-solid fa-pen-to-square'></i></a>
 </form>
 </td>
 </tr>

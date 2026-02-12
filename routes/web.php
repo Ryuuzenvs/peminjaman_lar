@@ -28,8 +28,8 @@ Route::delete('/loans/{id}', [LoanController::class, 'destroy'])->name('loans.de
 Route::get('/admin/loans', [LoanController::class, 'adminIndex'])->name('admin.loans.index');
 Route::get('/admin/loans/{id}/edit', [LoanController::class, 'edit'])->name('admin.loans.edit');
 Route::get('/admin/loans/create', [LoanController::class, 'create'])->name('admin.loans.create');
-Route::put('/admin/loans/{id}', [LoanController::class, 'update'])->name('admin.loans.update');
 //ro rescr for crud tool
+Route::put('/admin/loans/{id}', [LoanController::class, 'update'])->name('admin.loans.update');
     
 });
 
@@ -41,7 +41,7 @@ Route::get('/officer/report', [LoanController::class, 'report'])->name('officer.
 });
 
 Route::middleware(['auth:admin,officer,borrower'])->group(function () {
-    
+
     // cek role in contr 
     Route::put('/loans/return/{id}', [LoanController::class, 'returnTool'])->name('loans.return');
     Route::put('/loans/approve/{id}', [LoanController::class, 'approve'])->name('loans.approve');
@@ -57,4 +57,3 @@ Route::middleware(['role:borrower'])->group(function () {
 });
 
   
-

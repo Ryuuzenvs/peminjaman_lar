@@ -9,8 +9,8 @@
 
     <label>Status</label>
     <select name="status" class="form-control">
-        <option value="pend" {{ $loan->status == 'pend' ? 'selected' : '' }}>Pending</option>
-        <option value="borro" {{ $loan->status == 'borro' ? 'selected' : '' }}>Dipinjam</option>
+        <option value="pending" {{ $loan->status == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="borrow" {{ $loan->status == 'borrow' ? 'selected' : '' }}>Dipinjam</option>
         <option value="return" {{ $loan->status == 'return' ? 'selected' : '' }}>Kembali</option>
     </select>
 

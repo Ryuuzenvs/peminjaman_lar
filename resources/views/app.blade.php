@@ -1,53 +1,54 @@
-<link href={{ asset('bootstrap.min.css') }} rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link rel="stylesheet" href="../../../fasfa/css/all.min.css">
-<style>
-/* {
-    outline: 1px solid red !important;
-  } 
-</style>
+@extends('app')
 
-<body class="bg-light">
+@section('content')
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <h2>Selamat Datang, {{ auth()->guard('admin')->user()->username }}</h2>
+        <p class="text-muted">Role: <span class="badge bg-primary">Admin</span></p>
+    </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="col-md-4">
+        <div class="card bg-info text-white shadow">
+            <div class="card-body">
+                <h5>Total Alat</h5>
+                <h3>{{ \App\Models\tool::count() }}</h3>
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-	@php
-    // var guard login
-    $user = auth()->guard('admin')->user() 
-            ?? auth()->guard('officer')->user() 
-            ?? auth()->guard('borrower')->user();
-@endphp
-<a class="navbar-brand" href="{{ $user ? $user->dashboardUrl() : '#' }}">
-    PinjamAlat
-</a>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white shadow">
+            <div class="card-body">
+                <h5>Peminjaman Aktif</h5>
+                <h3>{{ \App\Models\loan::where('status', 'borrow')->count() }}</h3>
+            </div>
+        </div>
+    </div>
 
-<div class="navbar-nav">
-    @if(auth()->guard('admin')->check())
-        <a class="nav-link" href="{{ route('category.index') }}">Category</a>
-        <a class="nav-link" href="{{ route('tools.index') }}">Tool</a>
-        <a class="nav-link" href="{{ route('users.index') }}">User</a>
-        <a class="nav-link" href="{{ route('admin.loans.index') }}">Loan</a>
-<a class="nav-link" href="{{ route('admin.logs.index') }}">Logs</a>
-    @elseif(auth()->guard('officer')->check())
-        <a class="nav-link" href="{{ route('officer.dashboard') }}">Dashboard</a>
-        <a class="nav-link" href="{{ route('officer.report') }}">Laporan</a>
-    @else
-        <a class="nav-link" href="{{ route('borrower.dashboard') }}">My Loans</a>
-    @endif
-    <form action="{{ route('logout') }}" method="post" class="d-inline">
-        @csrf
-        <button type="submit" class="btn btn-link nav-link">Logout</button>
-    </form>
-</div>
+    <div class="col-md-4">
+        <div class="card bg-danger text-white shadow">
+            <div class="card-body">
+                <h5>Perlu Approval</h5>
+                <h3>{{ \App\Models\loan::where('status', 'pending')->count() }}</h3>
+            </div>
+        </div>
+    </div>
 </div>
 
-</nav>
-
-<div class="container">
-@yield('content')
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Aksi Cepat</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ route('tools.index') }}" class="btn btn-outline-primary">Kelola Data Alat</a>
+                <a href="{{route('category.index')}}" class="btn btn-outline-secondary">Kelola Kategori</a>
+                <a href="{{route('users.index')}}" class="btn btn-outline-warning">Kelola user</a>
+                <a href="{{route('admin.loans.index')}}" class="btn btn-outline-primary">Kelola loans</a>
+                <a href="{{route('admin.logs.index')}}" class="btn btn-outline-secondary">logs aktfitas</a>
+                </div>
+        </div>
+    </div>
 </div>
-
-</body>
-
-
+@endsection

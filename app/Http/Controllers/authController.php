@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 //use ilmuna/ http/ req, ilumna/supp/fasc/auth
 use Illuminate\Support\Facades\Auth; // conf auth user, prov as mod, guard as gate
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\ActivityLog;
 
 class authController extends Controller
@@ -22,9 +21,13 @@ public function showlogin()
 // else back
 
 public function login(Request $request) {
+    // conf
+    // valid inp
     $credentials = $request->only('username', 'password');
     $role = $request->role; // 'admin', 'officer',  'borrower'
 $roleValid = ['admin', 'officer', 'borrower'];
+
+// loc
 if(!in_array($role, $roleValid)){
 return back()->with('eror', 'choose role or role invalid');
 }
@@ -35,10 +38,12 @@ return back()->with('eror', 'choose role or role invalid');
         $request->session()->regenerate();
         $user = Auth::guard($role)->user();
         $msg = "[AUTH] User [ id : " . $user->id . " ] dengan [ usn : ". $request->username. "] login sebagai [" . strtoupper($role) . "]";
+
 //if($role == 'admin') {
 //$msg  = "bos ada yang mantau";
 //};
 
+// resl
 ActivityLog::create([
             'data' => $msg
         ]);
@@ -50,13 +55,17 @@ ActivityLog::create([
         return redirect()->route('admin.logs.index');    
     } else {
         }*/
+
+        // red
 return redirect()->route($role . '.dashboard');
    }
     return back()->with('error', 'Login fail, ' . $request->username . ' doesnt registered in database or wrong password ');
 }
 
 public function logout(Request $request) {
+    // conf
     $roles = ['admin', 'officer', 'borrower'];
+    // cond
     foreach ($roles as $role) {
         //cheking
         if(Auth::guard($role)->check()){
@@ -66,7 +75,7 @@ public function logout(Request $request) {
 
 //    $request->session()->invalidate();
   //  $request->session()->regenerateToken();
-
+// red
     return redirect()->route('login');
     }
 }
