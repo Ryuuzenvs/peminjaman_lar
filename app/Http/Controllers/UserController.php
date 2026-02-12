@@ -43,9 +43,9 @@ return view('admin.users.create');
 public function store(Request $request)
 {
 //valid 
-    $data = $request->validate([
-        'username' => 'required',
-        'email' => 'required',
+   $data = $request->validate([
+        'username' => 'required|unique:users,username', // duplikat
+        'email' => 'required|email|unique:users,email', 
         'password' => 'required|min:6',
         'role' => 'required'
     ]);
@@ -88,10 +88,13 @@ public function update(Request $request, $id)
     $role = $request->role; 
 //    $modelName = $this->getModel($role);
     $user = User::findOrFail($id);
+     if ($user->role === 'admin' && $request->role !== 'admin') {
+        return back()->with('error', 'Role Admin tidak boleh diubah menjadi role lain!');
+    }
 
     $data = $request->validate([
-        'username' => 'required',
-        'email' => 'required',
+        'username' => 'required|unique:users,username,' . $id,
+        'email' => 'required|email|unique:users,email,' . $id,
         'role' => 'required'
     ]);
 

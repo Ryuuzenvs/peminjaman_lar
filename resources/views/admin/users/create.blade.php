@@ -28,10 +28,10 @@
             <div class="mb-3">
                 <label class="form-label">Role</label>
                 <select name="role" class="form-control" required>
-                    <option> pilih role</option>
+                    <option disabled> pilih role</option>
                     <option value="borrower">Peminjam</option>
                     <option value="officer">Petugas</option>
-                    <option disabled value="">Admin</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary"><i class='fa-solid fa-plus'></i>

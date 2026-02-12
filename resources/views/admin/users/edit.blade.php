@@ -24,12 +24,14 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Role</label>
-                <select name="role" class="form-control" required>
-                    <option>pilih role</option>
-                    <option value="borrower" {{ $user->role == 'borrower' ? 'selected' : '' }}>Peminjam</option>
-                    <option value="officer" {{ $user->role == 'officer' ? 'selected' : '' }}>Petugas</option>
-                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                </select>
+                <select name="role" class="form-control" {{ $user->role === 'admin' ? 'disabled' : '' }}>
+    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+    <option value="officer" {{ $user->role === 'officer' ? 'selected' : '' }}>Officer</option>
+    <option value="borrower" {{ $user->role === 'borrower' ? 'selected' : '' }}>Borrower</option>
+</select>
+@if($user->role === 'admin')
+    <input type="hidden" name="role" value="admin">
+@endif
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{ route('users.index') }}" class="btn btn-warning">back</a>
