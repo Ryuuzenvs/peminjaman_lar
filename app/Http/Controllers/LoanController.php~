@@ -90,6 +90,7 @@ public function store(Request $request) {
 	]);
 
 // LOGGING
+/*
         ActivityLog::create([
             'data' => "[PINJAM] $borrowerName meminjam alat: $tool->name_tools (ID Pinjam: $loan->id)"
         ]);
@@ -99,6 +100,8 @@ public function store(Request $request) {
 			return back()->with('success', 'Berhasil meminjam alat!');
 			
         } catch (\Exception $e){
+*/
+
 //db rb
 DB::rollback    ();
 //dd($e->getMessage());
