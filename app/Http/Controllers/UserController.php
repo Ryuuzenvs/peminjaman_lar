@@ -47,7 +47,7 @@ public function store(Request $request)
         'username' => 'required|unique:users,username', // duplikat
         'email' => 'required|email|unique:users,email', 
         'password' => 'required|min:6',
-        'role' => 'required'
+        'role' => 'required|in:admin,officer,borrower' 
     ]);
 
 //enc
@@ -95,7 +95,7 @@ public function update(Request $request, $id)
     $data = $request->validate([
         'username' => 'required|unique:users,username,' . $id,
         'email' => 'required|email|unique:users,email,' . $id,
-        'role' => 'required'
+        'role' => 'required|in:officer,borrower' 
     ]);
 
     if ($request->filled('password')) {

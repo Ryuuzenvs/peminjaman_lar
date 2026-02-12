@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('penalty')->default(0);
             $table->date('return_date')->nullable();
             $table->date('loan_date');
+            $table->timestamp('request_return_date')->nullable();
             $table->timestamps();
         });
     }

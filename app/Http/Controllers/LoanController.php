@@ -37,19 +37,30 @@ class LoanController extends Controller
         return view('petugas.index', compact('tools', 'loans'));
     }
 
-    public function peminjamIndex()
-    {
-        //    $ tools = tool:wher(stok,>,0)>get()
-        //get req item
-        $tools = tool::where('stock', '>', 0)->get();
-        //    $ loan  = loan:wher(us_id, auth::id())>with('tool')>last()>get()
-        $borrowerId = $borrowerId = Auth::id();
-        // wher cek id in borrower is true, get tool
-        $myloan = loan::where('borrower_id', $borrowerId)->with('tool')->latest()->get();
-        // ret view (pem.ind, comp var)
-        return view('peminjam.index', compact('tools', 'myloan'));
-    }
+   public function peminjamIndex() {
+    $borrowerId = Auth::id();
+    // Ambil yang statusnya 'pending' atau 'borrow'
+    $myloan = loan::where('borrower_id', $borrowerId)
+                ->whereIn('status', ['pending', 'borrow'])
+                ->with('tool')
+                ->latest()
+                ->get();
+    return view('peminjam.index', compact('myloan'));
+}
 
+public function peminjamHistory() {
+    $borrowerId = Auth::id();
+    $history = loan::where('borrower_id', $borrowerId)
+                ->where('status', 'return')
+                ->with('tool')
+                ->latest()
+                ->get();
+    return view('peminjam.return', compact('history'));
+}
+public function peminjamCreate() {
+    $tools = tool::where('stock', '>', 0)->get();
+    return view('peminjam.loan', compact('tools'));
+}
     public function create()
     {
         // cek role whres user
@@ -271,4 +282,19 @@ class LoanController extends Controller
         $loan->delete();
         return back()->with('success', 'Data transaksi dihapus & stok disesuaikan.');
     }
+
+    public function requestReturn($id)
+{
+    $loan = loan::findOrFail($id);
+    
+
+    if ($loan->status === 'borrow') {
+        $loan->update([
+            'request_return_date' => Carbon::now()
+        ]);
+        return back()->with('success', 'Permintaan pengembalian dikirim. Tunggu verifikasi petugas.');
+    }
+    
+    return back()->with('error', 'Gagal memproses permintaan.');
+}
 }

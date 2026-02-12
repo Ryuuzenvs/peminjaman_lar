@@ -49,11 +49,18 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //ro midl([aut, 'role:']) ->group(func(){  })
-Route::middleware(['role:borrower'])->group(function () {
-//ro get (role das, func () {ret viw(role.i); })->name rol das
-   Route::get('/borrower/dashboard', [LoanController::class, 'peminjamIndex'])->name('borrower.dashboard');
-    Route::post('/pinjam', [LoanController::class, 'store'])->name('pinjam.store');
+Route::middleware(['auth', 'role:borrower'])->group(function () {
+    // Menu 1: Dashboard / Status Pinjaman (Gimmick Return ada di sini)
+    Route::get('/borrower/dashboard', [LoanController::class, 'peminjamIndex'])->name('borrower.dashboard');
+    
+    // Menu 2: Form Pinjam Alat
+    Route::get('/borrower/pinjam', [LoanController::class, 'peminjamCreate'])->name('borrower.pinjam');
+    
+    // Menu 3: Riwayat Pengembalian
+    Route::get('/borrower/history', [LoanController::class, 'peminjamHistory'])->name('borrower.history');
 
+    // Action Gimmick
+    Route::put('/loans/request-return/{id}', [LoanController::class, 'requestReturn'])->name('loans.requestReturn');
 });
 
   

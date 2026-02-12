@@ -31,6 +31,8 @@
         <a class="nav-link" href="{{ route('officer.report') }}">Laporan</a>
 @elseif($user && $user->role === 'borrower')
         <a class="nav-link" href="{{ route('borrower.dashboard') }}">My Loans</a>
+        <a class="nav-link" href="{{ route('borrower.pinjam') }}">Get Loans</a>
+        <a class="nav-link" href="{{ route('borrower.history') }}">Get Return</a>
     @endif
     <form action="{{ route('logout') }}" method="post" class="d-inline">
         @auth
