@@ -110,9 +110,9 @@ public function destroy(Request $request, $id)
     $user = User::findOrFail($id);
 
     // simp protect fail
-    if ( $user == auth()->id() && $role === 'admin') {
-        return back()->with('error', 'Tidak bisa menghapus akun sendiri');
-    }
+    if ($user->id === auth()->id()) {
+    return back()->with('error', 'Tidak bisa menghapus akun sendiri');
+}
 
     User::destroy($id);
     return back()->with('success', 'User berhasil dihapus');

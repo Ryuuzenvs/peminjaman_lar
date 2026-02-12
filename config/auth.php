@@ -37,9 +37,9 @@ return [
 
     'guards' => [
     'web' => [ 'driver' => 'session', 'provider' => 'users' ], 
-    'admin' => [ 'driver' => 'session', 'provider' => 'users' ], 
-    'officer' => [ 'driver' => 'session', 'provider' => 'users' ], 
-    'borrower' => [ 'driver' => 'session', 'provider' => 'users' ], 
+//    'admin' => [ 'driver' => 'session', 'provider' => 'users' ], 
+//    'officer' => [ 'driver' => 'session', 'provider' => 'users' ], 
+//    'borrower' => [ 'driver' => 'session', 'provider' => 'users' ], 
 ],
 
     /*

@@ -22,11 +22,21 @@ abrt 403
      */
     public function handle(Request $request, Closure $next, $role): Response
 {
-        $user = $request->user;
-    // Cek user login di guard yang diminta
-    if (!Auth::guard($role)->check()) {
-        abort(403, "Akses Ditolak: Anda tidak punya akses sebagai $role");
+       // 1. Cek apakah user sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        // 2. Ambil user yang sedang login (Guard Web)
+        $user = Auth::user();
+
+        // 3. Cek apakah role user sesuai dengan yang diminta route
+        // Kita bandingkan langsung dengan kolom 'role' di tabel users
+        if ($user->role === $role) {
+            return $next($request);
+        }
+
+        // Jika tidak sesuai, lempar 403 (Forbidden)
+        abort(403, 'Anda tidak memiliki akses ke halaman ini.');
     }
-    return $next($request);
-    }   
 }

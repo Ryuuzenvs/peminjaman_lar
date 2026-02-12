@@ -3,7 +3,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-12 mb-4">
-        <h2>Selamat Datang, {{ auth()->guard('admin')->user()->username }}</h2>
+<h2>Selamat Datang, {{ Auth::user()?->username }}</h2>
+
         <p class="text-muted">Role: <span class="badge bg-primary">Admin</span></p>
     </div>
 

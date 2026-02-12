@@ -31,14 +31,6 @@
                     <label class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="123" required>
                 </div>
-<div class="mb-3">
-				<select name="role" class="form-control" required>
-    <option value="" disabled selected>Select role</option>
-    <option value="admin">Admin</option>
-    <option value="officer">Petugas</option>
-    <option value="borrower">Peminjam</option>
-                </select>
-</div>
                 <button type="submit" class="btn btn-primary w-100" id="loginBtn">Login</button>
             </form> 
         </div>

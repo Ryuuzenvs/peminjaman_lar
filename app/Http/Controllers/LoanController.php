@@ -43,7 +43,7 @@ class LoanController extends Controller
         //get req item
         $tools = tool::where('stock', '>', 0)->get();
         //    $ loan  = loan:wher(us_id, auth::id())>with('tool')>last()>get()
-        $borrowerId = Auth::guard('borrower')->id();
+        $borrowerId = $borrowerId = Auth::id();
         // wher cek id in borrower is true, get tool
         $myloan = loan::where('borrower_id', $borrowerId)->with('tool')->latest()->get();
         // ret view (pem.ind, comp var)
@@ -84,7 +84,7 @@ class LoanController extends Controller
                 // $borrowerName = $borrower->username;
             } else {
                 // borrower login 
-                $user = auth()->guard('borrower')->user();
+                $user = $user = Auth::user();
                 $borrowerId = $user->id;
                 // $borrowerName = $user->username;
             }
@@ -124,7 +124,7 @@ class LoanController extends Controller
         //    loan = loan:finfil(id)
         // conf
         $loan = loan::with('borrower', 'tool')->findOrFail($id);
-        //loan > upd =([ status boro, admin id => auth() id()])
+        //loan > upd =([ status boro, admin id =>  id()])
 
         // login, Cek guard
         $approver = Auth::user();
@@ -227,7 +227,7 @@ class LoanController extends Controller
     {
         // conf 
         $loan = loan::with(['borrower', 'tool'])->findOrFail($id);
-        $users =  Auth::guard('admin');
+        $users = User::where('role', 'borrower')->get();
         $tools = tool::all();
         // ret
         return view('admin.loans.edit', compact('loan', 'users', 'tools'));
@@ -237,10 +237,10 @@ class LoanController extends Controller
     {
         // conf
         $loan = loan::findOrFail($id);
-        $user = Auth::guard('admin')->user();
-        if (!$user) {
-            $user = Auth::user();
-        }
+        $user = Auth::user();
+        // if (!$user) {
+        //     $user = Auth::user();
+        // }
 
         // cond
         if (!$user) return redirect()->route('login')->with('error', 'Login!');

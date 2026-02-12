@@ -14,7 +14,7 @@ Route::post('/login', [authController::class, 'login']) -> name('login.post');
 Route::post('/logout', [authController::class, 'logout']) -> name('logout');
 
 //ro midl([aut, 'role:']) ->group(func(){  })
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::resource('tools', ToolController::class);
 Route::resource('users', UserController::class); 
@@ -40,7 +40,7 @@ Route::get('/officer/dashboard', [LoanController::class, 'petugasIndex'])->name(
 Route::get('/officer/report', [LoanController::class, 'report'])->name('officer.report');
 });
 
-Route::middleware(['auth:admin,officer,borrower'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     // cek role in contr 
     Route::put('/loans/return/{id}', [LoanController::class, 'returnTool'])->name('loans.return');

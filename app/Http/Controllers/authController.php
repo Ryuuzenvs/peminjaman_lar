@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 //use ilmuna/ http/ req, ilumna/supp/fasc/auth
 use Illuminate\Support\Facades\Auth; // conf auth user, prov as mod, guard as gate
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\ActivityLog;
+use App\Models\User;
 
 class authController extends Controller
 {
@@ -24,19 +26,21 @@ public function login(Request $request) {
     // conf
     // valid inp
     $credentials = $request->only('username', 'password');
-    $role = $request->role; // 'admin', 'officer',  'borrower'
-$roleValid = ['admin', 'officer', 'borrower'];
+
+//    $role = $request->role; // 'admin', 'officer',  'borrower'
+//$roleValid = ['admin', 'officer', 'borrower'];
 
 // loc
-if(!in_array($role, $roleValid)){
-return back()->with('eror', 'choose role or role invalid');
-}
+//if(!in_array($role, $roleValid)){
+//return back()->with('eror', 'choose role or role invalid');
+//}
 
     // guard on $, att $
     //req ses genert
-    if (Auth::guard($role)->attempt($credentials)) {
+if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        $user = Auth::guard($role)->user();
+        $user = Auth::user();
+        $role = $user->role;
         $msg = "[AUTH] User [ id : " . $user->id . " ] dengan [ usn : ". $request->username. "] login sebagai [" . strtoupper($role) . "]";
 
 //if($role == 'admin') {
@@ -63,15 +67,8 @@ return redirect()->route($role . '.dashboard');
 }
 
 public function logout(Request $request) {
-    // conf
-    $roles = ['admin', 'officer', 'borrower'];
-    // cond
-    foreach ($roles as $role) {
-        //cheking
-        if(Auth::guard($role)->check()){
-            Auth::guard($role)->logout();
-        }
-     }
+   Auth::logout();
+    return redirect()->route('login');
 
 //    $request->session()->invalidate();
   //  $request->session()->regenerateToken();
