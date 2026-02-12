@@ -12,7 +12,7 @@
             $user = Auth::user();
         @endphp
 <a class="navbar-brand" href="{{ $user ? route($user->role . '.dashboard') : '#' }}">
-    PinjamAlat
+    RentalPs
 </a>
 
 <div class="navbar-nav">
